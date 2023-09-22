@@ -37,14 +37,14 @@ rm(list = c("armenia_ilcs", "poverty_db"))
 #   by the household? (in m3)
 
 fuelwood_db |> 
-  group_by(hh_03,decile) |> 
+  group_by(hh_03) |> 
   summarize(
     use_for_heat = mean(hous_29_0__6, na.rm = TRUE) * 100,
     energy_carrier = mean(hous_29__3, na.rm = TRUE) * 100,
-    volume = mean(hous_31_a, na.rm = TRUE),
-    cost = mean(hous_31_b, na.rm = TRUE),
-    annual_volume = mean(hous_31_aa, na.rm = TRUE),
-    annual_cost = mean(hous_31_bb, na.rm = TRUE),
+    monthly_volume_m3 = mean(hous_31_a, na.rm = TRUE),
+    monthly_cost = mean(hous_31_b, na.rm = TRUE) #,
+    #annual_volume = mean(hous_31_aa, na.rm = TRUE),
+    #annual_cost = mean(hous_31_bb, na.rm = TRUE),
   )
 
 ## Reference Annex
