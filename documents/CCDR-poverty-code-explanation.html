@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Renato Vargas">
+
+<title>CCDR Poverty Code</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="CCDR-poverty-code-explanation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="CCDR-poverty-code-explanation_files/libs/quarto-html/quarto.js"></script>
+<script src="CCDR-poverty-code-explanation_files/libs/quarto-html/popper.min.js"></script>
+<script src="CCDR-poverty-code-explanation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="CCDR-poverty-code-explanation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="CCDR-poverty-code-explanation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="CCDR-poverty-code-explanation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="CCDR-poverty-code-explanation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="CCDR-poverty-code-explanation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="CCDR-poverty-code-explanation_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">CCDR Poverty Code</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Renato Vargas </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="data-prep" class="level1">
+<h1>Data Prep</h1>
+<section id="program-setup" class="level2">
+<h2 class="anchored" data-anchor-id="program-setup">Program setup</h2>
+<p>This sets the minimum required Stata version to run the code to 15.1. We also do housekeeping.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 15.1</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> <span class="dt">_all</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">more</span> <span class="kw">off</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These lines prepare the Stata environment:</p>
+<ul>
+<li><code>drop _all</code> removes all variables from the dataset in memory.</li>
+<li><code>clear all</code> removes all data from memory.</li>
+<li><code>set more off</code> turns off the ‘more’ feature, which pauses output at the screen every time it’s filled.</li>
+</ul>
+</section>
+<section id="program-setup-1" class="level2">
+<h2 class="anchored" data-anchor-id="program-setup-1">Program setup</h2>
+<p>Checks if the current Stata user’s name is <code>"wb527706"</code>. If it is, it sets the global macro <code>path</code> to the specified directory. This tailosr the code to a specific user’s directory structure.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> <span class="st">"`c(username)'"</span>==<span class="st">"wb527706"</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> path <span class="st">"C:\Users\WB527706\OneDrive - WBG\Madagascar"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The next lines set up a series of global macros with directory paths based on the earlier-defined <code>path</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> HHsurvey    = <span class="st">"$path\data"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> inputs       = <span class="st">"$path/inputs"</span>    </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> outputs     = <span class="st">"$path/outputs"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> MAGclimsim <span class="st">"$path\MagClimSim.xlsx"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="hh-consumption-aggregates-and-characteristics" class="level2">
+<h2 class="anchored" data-anchor-id="hh-consumption-aggregates-and-characteristics">1: HH consumption aggregates and characteristics</h2>
+<p>This loads a dataset from the specified directory, which was previously defined in the global macro <code>HHsurvey</code>. The <code>clear</code> option ensures that any current data in memory is replaced. Note that we don’t have access to that survey.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>u <span class="st">"$HHsurvey\outputdata\ca_real_pl.dta"</span>, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, a new variable <code>rural</code> is created, which is equal to 1 if the area is “Rural” and 0 if the area is “Urbain”.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>g       rural   = 1     <span class="kw">if</span>  area==<span class="st">"Rural"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> rural   = 0     <span class="kw">if</span>  area==<span class="st">"Urbain"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The variable <code>pcer</code> is renamed to <code>pcc</code> (indicating per capita expenditure).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ren</span> pcer pcc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A new variable <code>yhh</code> is created by multiplying <code>pcc</code> (per capita expenditure) by <code>hhsize</code> (household size).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g yhh=pcc*hhsize</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These lines rename the variables: <code>wgt</code> becomes <code>wgt0</code> and <code>wgt_adj</code> becomes <code>wgt</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ren</span> wgt wgt0 </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ren</span> wgt_adj wgt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This line keeps only the listed variables in the dataset, dropping all others.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span>  hhid rural hhsize region pcc yhh wgt yhh pline215 pline365 pline685 ubpl lbpl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A temporary file named <code>HHcha</code> is specified, and the current dataset is saved to that file.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> HHcha</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="ot">`HHcha'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So far:</p>
+<ol type="1">
+<li>Sets up paths tailored to the user’s directory structure.</li>
+<li>Loads a specific dataset related to household consumption aggregates and characteristics.</li>
+<li>Manipulates and keeps only select variables of interest.</li>
+<li>Saves the modified data to a temporary file for later use.</li>
+</ol>
+</section>
+<section id="demographic-characteristics" class="level2">
+<h2 class="anchored" data-anchor-id="demographic-characteristics">2: Demographic characteristics</h2>
+<p>This line loads a dataset related to demographic characteristics from the directory specified by the global macro <code>HHsurvey</code>, replacing data in memory.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>u <span class="st">"$HHsurvey\outputdata\S01_DEMO_01.dta"</span>, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, a new variable <code>hhgrap</code> is created, identical to the <code>cluster</code> variable. The dataset in memory is then merged with the <code>DéfinitionsQuatreMilieux.dta</code> dataset based on the <code>hhgrap</code> variable. The resulting <code>_merge</code> variable (indicating merge success for each observation) is dropped as customary.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>g hhgrap=<span class="kw">cluster</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">merge</span> n:1 hhgrap <span class="kw">using</span> <span class="st">"$HHsurvey\outputdata\DéfinitionsQuatreMilieux.dta"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> <span class="dt">_merge</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The variable <code>MILIEU4</code> is renamed to <code>zone</code> and the variable <code>sex</code> is renamed to <code>gender</code>. A new binary variable <code>head</code> is created, which takes a value of 1 when <code>relhead</code> equals 1 (presumably indicating that the individual is the head of the household) and 0 otherwise. The variable <code>relhead</code> is renamed to <code>rel</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ren</span> MILIEU4 zone</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ren</span> sex gender</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>g   <span class="fu">head</span> = relhead == 1</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ren</span> relhead rel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Only the specified variables are retained, and all other variables are dropped.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> hhid pid gender age <span class="fu">head</span> rel zone</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The dataset in memory is saved to a temporary file named <code>demo</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> demo</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="ot">`demo'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="years-of-education" class="level2">
+<h2 class="anchored" data-anchor-id="years-of-education">3: Years of education</h2>
+<p>A new dataset related to education is loaded, replacing the current dataset in memory. Note that we don’t have access to that one.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>u <span class="st">"$HHsurvey\inputdata\EPM21\S02_EDUC.dta"</span>, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A new variable <code>yos</code> (probably standing for the availability of “years of schooling”) is created based on the variable <code>q2_26</code>. However, its value is set to 0 wherever the variable <code>q2_01</code> is not equal to 1. Note that the consultant made a code annotation explicitly sayin that it is NOT “years of schooling”. Then the variable <code>yos</code> is renamed to <code>educy</code>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> yos = q2_26</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> yos=0 <span class="kw">if</span> q2_01 != 1</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> yos educy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The data is sorted by <code>hhgrap</code> and <code>hhnum</code>. Then, a new variable <code>hhid</code> is created by concatenating <code>hhgrap</code> and <code>hhnum</code>, presumably to create a unique household ID. The variables <code>hhgrap</code> and <code>q2_0x</code> are then renamed to <code>cluster</code> and <code>pid</code>, respectively.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sort</span> hhgrap hhnum</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">egen</span> hhid = <span class="fu">concat</span>(hhgrap hhnum), <span class="kw">format</span>(%9.0g) <span class="fu">punct</span>(<span class="st">","</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> hhgrap <span class="kw">cluster</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> q2_0x pid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Only the specified variables are retained, and all others are dropped. The dataset in memory is saved to a temporary file named <code>edu</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> hhid pid educy</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> edu</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="ot">`edu'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To summarize, this code segment:</p>
+<ol type="1">
+<li>Loads a dataset related to demographic characteristics.</li>
+<li>Merges it with another dataset to enhance the information.</li>
+<li>Makes some modifications to the variable names and keeps relevant variables.</li>
+<li>Saves the modified dataset to a temporary file.</li>
+<li>Loads a new dataset related to years of education.</li>
+<li>Makes transformations related to educational years and constructs a unique household ID.</li>
+<li>Keeps the necessary variables and saves the modified dataset to another temporary file.</li>
+</ol>
+</section>
+<section id="non-labor-income" class="level2">
+<h2 class="anchored" data-anchor-id="non-labor-income">4: Non labor income</h2>
+<section id="pensions-rents-and-dividends" class="level3">
+<h3 class="anchored" data-anchor-id="pensions-rents-and-dividends">Pensions, rents, and dividends</h3>
+<p>This section of code is focused on calculating and aggregating non-labor income. First, we have pensions, rents, dividends, and lotteries. The script loads a dataset related to various revenues.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>u <span class="st">"$HHsurvey\inputdata\EPM21\S05_REVE.dta"</span>, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The next series of lines, as before, creates a unique household ID by concatenating <code>hhgrap</code> and <code>hhnum</code>, and then renames some variables.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">sort</span>    hhgrap hhnum</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">egen</span>    hhid =  <span class="fu">concat</span>(hhgrap hhnum), <span class="kw">format</span>(%9.0g) <span class="fu">punct</span>(<span class="st">","</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">rename</span>  hhgrap  <span class="kw">cluster</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">rename</span>  q5_0x   pid </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For each type of income (pensions, rents, dividends, and occasional income like lottery winnings), the script creates a new variable only if another corresponding variable is set to 1 (probably indicating that the income source is relevant for that observation).</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Pension annual basis: retrate/veuvage/dinvalidité/alimentaire</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> nli_pen1=q5_02 <span class="kw">if</span> q5_01==1</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> nli_pen2=q5_04 <span class="kw">if</span> q5_03==1</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> nli_pen3=q5_06 <span class="kw">if</span> q5_05==1</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> nli_pen4=q5_08 <span class="kw">if</span> q5_07==1</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Rents    </span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> nli_rent=q5_10 <span class="kw">if</span> q5_09==1</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Dividends </span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> nli_div=q5_12 <span class="kw">if</span> q5_11==1</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">// lottery win, inheritance, sale of property, etc</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> nli_occ=q5_14 <span class="kw">if</span> q5_13==1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This line creates a new variable, <code>nli_prdo</code> (presumably non-labor income pensions, rents, dividents, o?), that sums up the previously created income variables for each observation. The data is then collapsed (aggregated) by <code>hhid</code>, and saved into a temporary file.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">egen</span> nli_prdo=rsum(nli_pen1 nli_pen2 nli_pen3 nli_pen4 nli_rent nli_div nli_occ)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">collapse</span> (<span class="kw">sum</span>) nli_prdo ,<span class="kw">by</span>(hhid)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> nli_prdo</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="ot">`nli_prdo'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="individual-transfers" class="level2">
+<h2 class="anchored" data-anchor-id="individual-transfers">Individual TRANSFERS</h2>
+<p>The next section focuses on individual transfers. It follows a similar structure: load data, create a unique household ID, create variables for different income sources (in this case, transfers), aggregate by household, and save to a temporary file.</p>
+<p>The new variables (<code>nli_hhs1</code> and <code>nli_hhs2</code>) are generated based on conditions related to the frequency of the transfer (monthly, quarterly, etc.), and then aggregated into <code>nli_itrans</code>.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>u <span class="st">"$HHsurvey\inputdata\EPM21\S13_TRAN_A.dta"</span>, <span class="kw">clear</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">//ID at HH and IND definition </span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">sort</span>    hhgrap hhnum</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="kw">egen</span>    hhid =  <span class="fu">concat</span>(hhgrap hhnum), <span class="kw">format</span>(%9.0g) <span class="fu">punct</span>(<span class="st">","</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span>  hhgrap  <span class="kw">cluster</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>g        nli_hhs1=q13_18a*12     <span class="kw">if</span> q13_18b==1 &amp; (q13_01==1 | q13_02==1) </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_hhs1=q13_18a*4      <span class="kw">if</span> q13_18b==2 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_hhs1=q13_18a*2      <span class="kw">if</span> q13_18b==3 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_hhs1=q13_18a        <span class="kw">if</span> q13_18b==4 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_hhs1=q13_18a        <span class="kw">if</span> q13_18b==5 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>g       nli_hhs2=q13_21a*12      <span class="kw">if</span> q13_21b==1 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_hhs2=q13_21a*4      <span class="kw">if</span> q13_21b==2 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_hhs2=q13_21a*2      <span class="kw">if</span> q13_21b==3 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_hhs2=q13_21a        <span class="kw">if</span> q13_21b==4 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_hhs2=q13_21a        <span class="kw">if</span> q13_21b==5 &amp; (q13_01==1 | q13_02==1)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="kw">egen</span> nli_itrans=rsum(nli_hhs1 nli_hhs2)</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="kw">collapse</span> (<span class="kw">sum</span>) nli_itrans ,<span class="kw">by</span>(hhid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Saved temporarily in:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> nli_itrans</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="ot">`nli_itrans'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="public-transfers" class="level2">
+<h2 class="anchored" data-anchor-id="public-transfers">Public Transfers</h2>
+<p>This section deals with public transfers. The data handling is quite similar to the previous sections. The income from public transfers is calculated based on the frequency, aggregated by household, and saved into a temporary file <code>nli_gov</code>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>u <span class="st">"$HHsurvey\inputdata\EPM21\S15_FILE.dta"</span>, <span class="kw">clear</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">//ID at HH and IND definition </span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">sort</span>    hhgrap hhnum</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="kw">egen</span>    hhid =  <span class="fu">concat</span>(hhgrap hhnum), <span class="kw">format</span>(%9.0g) <span class="fu">punct</span>(<span class="st">","</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span>  hhgrap  <span class="kw">cluster</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>g        nli_gov=q15_10a*12     <span class="kw">if</span> q15_10b==1 &amp; (q15_02==1 ) </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_gov=q15_10a*4      <span class="kw">if</span> q15_10b==2 &amp; (q15_02==1 )  </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_gov=q15_10a*2      <span class="kw">if</span> q15_10b==3 &amp; (q15_02==1 ) </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_gov=q15_10a        <span class="kw">if</span> q15_10b==4 &amp; (q15_02==1 )</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span>  nli_gov=q15_10a        <span class="kw">if</span> q15_10b==5 &amp; (q15_02==1 )    </span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="kw">collapse</span> (<span class="kw">sum</span>) nli_gov ,<span class="kw">by</span>(hhid)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> nli_gov</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="ot">`nli_gov'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The last piece ofcode merges the aggregated data from the three previous sections</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>u  <span class="ot">`nli_prdo'</span>, <span class="kw">clear</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">merge</span> 1:1 hhid <span class="kw">using</span> <span class="ot">`nli_itrans'</span> , nogen</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">merge</span> 1:1 hhid <span class="kw">using</span> <span class="ot">`nli_gov'</span> , nogen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, the script loads the data related to pensions, rents, dividends, etc., and then merges it with the data from individual and public transfers using <code>hhid</code> as the key variable.</p>
+<p>A new variable, <code>nli_hh</code>, is created, which is the sum of all non-labor income sources for each household.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">egen</span> nli_hh=rsum(nli_prdo nli_gov nli_itrans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, this aggregated data is saved into another temporary file.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> nli</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="ot">`nli'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To summarize, this segment of the code:</p>
+<ol type="1">
+<li>Loads datasets related to various non-labor income sources: pensions, rents, dividends, individual transfers, and public transfers.</li>
+<li>Processes each data source to calculate the total income for each type.</li>
+<li>Merges the data from the various sources and aggregates the total non-labor income by household.</li>
+<li>Saves the resulting dataset for future use.</li>
+</ol>
+</section>
+<section id="labor-market-variables" class="level2">
+<h2 class="anchored" data-anchor-id="labor-market-variables">5: Labor market variables</h2>
+<p>A dataset related to employment is loaded into Stata.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>u <span class="st">"$HHsurvey\inputdata\EPM21\S04_EMPL_AI.dta"</span>, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The subsequent lines create a unique household ID by concatenating <code>hhgrap</code> and <code>hhnum</code>, and rename some variables. This pattern has been repeated from the previous chunks of code. The data is then merged with the non-labor income dataset (created in the previous section):</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sort</span>    hhgrap hhnum</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="kw">egen</span>    hhid =  <span class="fu">concat</span>(hhgrap hhnum), <span class="kw">format</span>(%9.0g) <span class="fu">punct</span>(<span class="st">","</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span>  hhgrap  <span class="kw">cluster</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span>  q4a_xx  pid</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Merge non-labor income part</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="kw">merge</span> n:1 hhid <span class="kw">using</span> <span class="ot">`nli'</span> , nogen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="labor-force-status" class="level3">
+<h3 class="anchored" data-anchor-id="labor-force-status">Labor Force Status:</h3>
+<p>The variable <code>lstatus</code> is created based on different responses to the employment-related questions. This variable categorizes individuals into employed, unemployed and seeking work, unemployed but not seeking work, or outside the labor force (OLF).</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode do code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">//employed</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>g lstatus = 1 <span class="kw">if</span>  q4a_01==1 | q4a_02==1 | q4a_03==1 | q4a_04==1 | q4a_09&lt;4</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> lstatus = 2  <span class="kw">if</span> q4a_96==1 <span class="co">//unemployed - available and searching </span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> lstatus = 3  <span class="kw">if</span> q4a_96==2  <span class="co">//unemployed - available, but not searching </span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> lstatus = 4  <span class="kw">if</span> <span class="fu">missing</span>(lstatus) <span class="co">//OLF</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>lab <span class="kw">var</span> lstatus <span class="st">"Labor force status"</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>lab def lstatus_lab </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"employed"</span> 2 <span class="st">"unemployed - seeking"</span> 3 <span class="st">"unemployed - not-seeking"</span> 4 <span class="st">"OLF"</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>lab val lstatus lstatus_lab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="employed-population-and-salaried-status" class="level3">
+<h3 class="anchored" data-anchor-id="employed-population-and-salaried-status">Employed Population and Salaried Status:</h3>
+<p>The code identifies which individuals are employed (<code>employed</code> variable) and then aggregates this at the household level. It then determines if employed individuals are salaried or self-employed.</p>
+</section>
+<section id="labor-income-computations" class="level3">
+<h3 class="anchored" data-anchor-id="labor-income-computations">Labor Income Computations:</h3>
+<p>The subsequent part of the code calculates labor income (<code>lab_pri</code>) based on different frequencies of payment (daily, weekly, monthly, etc.). Similar calculations are done for bonuses (<code>lab_ikb</code>), other in-kind incomes (<code>lab_iko</code>, <code>lab_ikf</code>), and incomes from a second job (<code>lab_sec</code>, <code>lab_sik</code>, <code>lab_sit</code>, <code>lab_sif</code>). The total labor income is then aggregated into <code>lab_tot</code>.</p>
+</section>
+<section id="treatment-of-missing-data-and-outliers" class="level3">
+<h3 class="anchored" data-anchor-id="treatment-of-missing-data-and-outliers">Treatment of Missing Data and Outliers:</h3>
+<p>The script examines missing labor income values among employed individuals and identifies outliers. Observations with labor incomes more than 5 standard deviations away from the mean are marked as outliers.</p>
+</section>
+<section id="merge-with-demographic-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="merge-with-demographic-characteristics">Merge with Demographic Characteristics:</h3>
+<p>The dataset is merged with household characteristics (<code>HHcha</code>), demographics (<code>demo</code>), and education (<code>edu</code>) datasets.</p>
+</section>
+<section id="sector-categorization" class="level3">
+<h3 class="anchored" data-anchor-id="sector-categorization">Sector Categorization:</h3>
+<p>The <code>sector</code> variable categorizes individuals into primary, secondary, or tertiary sectors based on their reported economic activity (<code>q4a_230</code>). There’s also imputation logic in place for missing sector information, where an employed individual without a specified sector is assigned the sector of the household head.</p>
+</section>
+<section id="model-for-predicting-labor-income" class="level3">
+<h3 class="anchored" data-anchor-id="model-for-predicting-labor-income">Model for Predicting Labor Income:</h3>
+<p>The code calculates squared values for education (<code>educy2</code>) and age (<code>age2</code>) and creates a binary variable for males (<code>male</code>). A natural logarithm of total labor income is then calculated (<code>lnlab</code>).</p>
+<p>Subsequently, a regression model (<code>reg</code>) predicts the logarithm of labor income (<code>lnlab</code>) based on various factors, but only for employed individuals who are neither outliers nor missing income values.</p>
+<p>Using this model, predicted income values (<code>remp2</code> and <code>temp2</code>) are generated for employed outliers or those missing labor income data.</p>
+<p>Finally, these predicted values are transformed to actual income scale (<code>simuli</code>) using the exponential function, and negative predictions are set to zero.</p>
+<hr>
+<p>In summary, this section of the code:</p>
+<ol type="1">
+<li>Loads and processes labor market data.</li>
+<li>Calculates labor force status and categorizes people based on their employment and income details.</li>
+<li>Computes and aggregates labor income for different sources.</li>
+<li>Treats missing data and outliers for labor income.</li>
+<li>Merges the processed labor data with demographic and education datasets.</li>
+<li>Categorizes individuals based on their sector of economic activity.</li>
+<li>Predicts labor income for those missing data using regression, and adjusts the predictions as needed.</li>
+</ol>
+<p>This is golden, can you please further explain this code: /*=================================================================================== 5.1: Shares and total income to the modele ===================================================================================*/ //Replacing mincer over outliers and missings replace lab_tot=simuli if employed==1 &amp; (outlier==1 | missings==1 ) //total labor income at HH level bysort hhid : egen lab_hh=sum(lab_tot) egen income_hh=rsum(lab_hh nli_hh) g s_lab = lab_hh/income_hh g s_nli = nli_hh/income_hh g lny =ln(income_hh) g lnc =ln(yhh) ///marginal propensity to consume g mpc = yhh/income_hh *reg lnc lny *predict mpcl00, sc /* g share_labor=lab_tot_hh/yhh if employed==1 replace share_labor=1 if share_labor&gt;1 &amp; employed==1 */ g share=lab_tot/lab_hh if employed==1 *HH Consumption from labor gen ylb = yhh*s_lab lab var ylb “Household consumption from labor income -nominal (Ariary/hh/year)” *HH Consumption from labor gen ynl = yhh*(1-s_lab) lab var ynl “Household consumption from non-labor income - nominal (Ariary/hh/year)” g ylbi=ylb*share if employed==1 **************PENDIENTE LABOR FROM MINCERIAN **Consumption form labor split among employee (share calculated from Mincerian) keep hhid pid industry yhh ylb ynl ylbi salaried tempfile labor save `labor’ /*=================================================================================== 6: Final datasets ===================================================================================*/ u `HHcha’ , clear merge 1:n hhid using `demo’ , gen(dem) keep if dem==3 merge 1:1 hhid pid using `edu’ , gen(edu) merge 1:1 hhid pid using `labor’ , gen(labo) drop dem edu labo save “$HHsurvey_assigned.dta”, replace</p>
+<p>Of course, let’s break down this section:</p>
+<pre><code>/*===================================================================================
+              5.1: Shares and total income to the model  
+===================================================================================*/</code></pre>
+<p>This section’s title indicates that it’s focused on computing shares and total income in preparation for a model.</p>
+<pre><code>replace lab_tot=simuli if  employed==1 &amp; (outlier==1 | missings==1 )</code></pre>
+<p>Here, for those individuals who are employed and are either considered outliers or have missing labor income data (<code>lab_tot</code>), their labor income is replaced with the simulated value (<code>simuli</code>) generated in the previous section.</p>
+<pre><code>bysort hhid : egen lab_hh=sum(lab_tot)</code></pre>
+<p>This line calculates the total labor income at the household level, aggregating all individual incomes within each household.</p>
+<pre><code>egen    income_hh=rsum(lab_hh nli_hh)</code></pre>
+<p>The total income for each household is computed by summing the total labor income (<code>lab_hh</code>) and non-labor income (<code>nli_hh</code>).</p>
+<pre><code>g       s_lab    = lab_hh/income_hh
+g       s_nli    = nli_hh/income_hh</code></pre>
+<p>The above lines calculate the share of labor and non-labor income out of the total income for each household.</p>
+<pre><code>g       lny      =ln(income_hh)
+g       lnc      =ln(yhh)</code></pre>
+<p>These lines compute the natural logarithms of total income (<code>income_hh</code>) and household consumption (<code>yhh</code>).</p>
+<pre><code>g       mpc      = yhh/income_hh</code></pre>
+<p>The marginal propensity to consume (<code>mpc</code>) is calculated as the ratio of household consumption (<code>yhh</code>) to total income (<code>income_hh</code>).</p>
+<p>The subsequent lines compute shares and derive other variables related to labor income and consumption:</p>
+<ul>
+<li><p><code>share</code> captures the individual’s share of labor income in the household’s total labor income, but only for those employed.</p></li>
+<li><p><code>ylb</code> gives the portion of household consumption funded by labor income, while <code>ynl</code> represents the portion of household consumption sourced from non-labor income.</p></li>
+<li><p><code>ylbi</code> represents the individual’s portion of household consumption funded by their labor income, again limited to the employed.</p></li>
+</ul>
+<p>The dataset is then pruned to keep only select variables, and saved to a temporary file.</p>
+<pre><code>/*===================================================================================
+              6: Final datasets  
+===================================================================================*/   </code></pre>
+<p>The title indicates the creation of the final datasets for further analysis.</p>
+<p>The main household characteristics dataset (<code>HHcha</code>) is loaded again. It then gets merged sequentially with the demographic (<code>demo</code>), education (<code>edu</code>), and labor (<code>labor</code>) datasets. After each merge, a generation (<code>gen</code>) variable captures the merge results, which can help in tracking merge success or diagnosing issues.</p>
+<p>Once all necessary merges are done, the generation variables (<code>dem</code>, <code>edu</code>, <code>labo</code>) are dropped. The resulting final dataset, which combines household characteristics, demographics, education, and labor variables, is then saved as <code>MAG_assigned.dta</code>.</p>
+<hr>
+<p>In summary, this segment:</p>
+<ol type="1">
+<li>Adjusts individual labor income values based on simulations for outliers and missing data.</li>
+<li>Computes various shares related to labor and non-labor incomes.</li>
+<li>Creates the logarithm of incomes and computes the marginal propensity to consume.</li>
+<li>Derives individual and household-level variables for consumption funded by labor and non-labor income.</li>
+<li>Merges several datasets to compile a comprehensive dataset containing household characteristics, demographics, education, and labor information.</li>
+<li>Saves the final dataset for subsequent analysis.</li>
+</ol>
+<p>this is awesome, thank you</p>
+<p>You’re welcome! I’m glad I could help. If you have any more questions or need further assistance with anything else, don’t hesitate to ask. Happy coding!</p>
+<p>Okay, let’s move on to the next file:</p>
+<p>Of course! Please provide the next set of code or describe the file’s contents, and I’ll be happy to help you break it down or answer any questions you might have.</p>
+<p>Okay, you already did this chunk, but I mistakenly showed it to you first. Can we do it again for completeness? { use “<span class="math inline">\(popdata" if country=="\)</span>country”, clear qui gcollapse (sum) yf* ym*, by(Variant country) qui reshape long yf ym, i(country Variant) j(year) qui g pop = yf+ym qui drop yf ym drop country tempfile pop save `pop’ qui sum year local minyear = surveyyear local maxyear = r(max) local v = 1 foreach variant in “Medium” “Low” “High” “Constant-fertility” “Instant-replacement” “Momentum” “Instant-replacement-zero-migration” “Constant-mortality” “No-change” { forvalues t = `minyear’/`maxyear’ { /* Population growth */ qui sum pop if year==`t’ &amp; Variant==“`variant’” local pop_t = r(sum) qui sum pop if year==`minyear’ &amp; Variant==“`variant’” local pop_base = r(sum) global pop_growth_t`t’_v`v’ = `pop_t’/`pop_base’ } local v = `v’+1 } } /// Import elasticities import excel “${scenario_file}”, sheet(elas_rep) clear mkmat A , mat(E)</p>
+<p>Certainly, let’s go through this code chunk once again.</p>
+<pre><code>use "$popdata" if country=="$country", clear</code></pre>
+<p>This command loads a dataset specified by the global macro <code>popdata</code>, but only for the observations where the variable <code>country</code> matches the value specified by the global macro <code>country</code>.</p>
+<pre><code>qui gcollapse (sum) yf* ym*, by(Variant country) </code></pre>
+<p>Here, we are aggregating the data by <code>Variant</code> and <code>country</code> using <code>gcollapse</code> (an enhanced version of Stata’s <code>collapse</code> command). The <code>(sum)</code> function sums up all the variables starting with <code>yf</code> and <code>ym</code>.</p>
+<pre><code>qui reshape long yf ym, i(country Variant) j(year)</code></pre>
+<p>This reshapes the dataset from wide to long format based on the <code>yf</code> and <code>ym</code> variables. The combined identifiers are <code>country</code> and <code>Variant</code>, while the variable <code>year</code> is created to represent the time dimension.</p>
+<pre><code>qui g pop = yf+ym </code></pre>
+<p>Here, we generate a new variable named <code>pop</code>, which is the sum of the <code>yf</code> (likely female population) and <code>ym</code> (likely male population) variables, essentially getting the total population.</p>
+<pre><code>qui drop yf ym</code></pre>
+<p>The individual gender-based population variables (<code>yf</code> and <code>ym</code>) are then dropped, as we now have the combined <code>pop</code> variable.</p>
+<pre><code>drop country</code></pre>
+<p>The variable <code>country</code> is dropped from the dataset.</p>
+<pre><code>tempfile pop
+save `pop'</code></pre>
+<p>The dataset is then saved into a temporary file named <code>pop</code>.</p>
+<pre><code>qui sum year</code></pre>
+<p>The <code>year</code> variable is summarized to get its basic statistics.</p>
+<pre><code>local minyear = $surveyyear
+local maxyear = r(max)</code></pre>
+<p>Two local macros are defined: <code>minyear</code>, which is assigned the value of the global macro <code>surveyyear</code>, and <code>maxyear</code>, which is assigned the maximum value of the <code>year</code> variable.</p>
+<pre><code>local v = 1
+foreach variant in "Medium" "Low" "High" "Constant-fertility" "Instant-replacement" "Momentum" "Instant-replacement-zero-migration" "Constant-mortality" "No-change" {</code></pre>
+<p>A local macro <code>v</code> is initialized to 1. The subsequent loop then runs over several population projection variants.</p>
+<pre><code>   forvalues t = `minyear'/`maxyear' {  
+        /* Population growth */
+        qui sum pop if year==`t' &amp; Variant=="`variant'"
+        local pop_t = r(sum) 
+        qui sum pop  if year==`minyear' &amp; Variant=="`variant'"
+        local pop_base = r(sum) 
+        global pop_growth_t`t'_v`v' = `pop_t'/`pop_base'
+    }
+    local v = `v'+1</code></pre>
+<p>For each variant and for every year between <code>minyear</code> and <code>maxyear</code>, the total population (<code>pop</code>) for that year (<code>pop_t</code>) and the base year (<code>pop_base</code>) is calculated. The population growth rate is then computed by dividing <code>pop_t</code> by <code>pop_base</code> and saved into a global macro with a naming convention based on the year and variant. The counter <code>v</code> increments for each variant.</p>
+<pre><code>}</code></pre>
+<p>This closes the outer loop iterating over population variants.</p>
+<pre><code>import excel "${scenario_file}", sheet(elas_rep) clear </code></pre>
+<p>Lastly, the code imports an Excel file specified by the macro <code>scenario_file</code> from a sheet named <code>elas_rep</code>, clearing the existing data in memory.</p>
+<pre><code>mkmat A  , mat(E)</code></pre>
+<p>This command is creating a matrix <code>E</code> from the dataset (specifically from variable <code>A</code>).</p>
+<p>In summary, this chunk of code:</p>
+<ol type="1">
+<li>Imports a dataset and reshapes it to long format based on population variables.</li>
+<li>Aggregates the data to get total populations by year and variant.</li>
+<li>Computes population growth rates for different scenarios across years.</li>
+<li>Imports another dataset from Excel related to some scenarios.</li>
+<li>Transforms part of the dataset into a matrix for further analysis.</li>
+</ol>
+<p>Thank you, let’s move forward with the next chunk: ******************************************************************************** /* Import data from the excel file received from macroeconomic modelers */ ******************************************************************************** { local i = 0 foreach x of global scenarios { qui import excel “<span class="math inline">\({scenario\_file}", sheet("\`x'") cellrange(A3:N63) clear ren (\*) (\)</span>vars) local i = `i’+1 g scenid = `i’ tempfile scen`i’ qui save `scen`i’’ } use `scen1’, clear local num : list sizeof global(scenarios) forvalues i = 2/`num’ { append using `scen`i’’ } cap drop if year==. qui g rwage = wage/cpi g Variant =”” local i = 1 foreach variant of global variants { replace Variant = “`variant’” if scenid==`i’ local i = `i’ + 1 } merge m:1 year Variant using `pop’ drop if _merge==2 drop _merge sort scenid year g consumption_pc = consumption/(pop*10e2) }</p>
+<p>Certainly! Let’s break this code chunk down.</p>
+<pre><code>********************************************************************************
+/* Import data from the excel file received from macroeconomic modelers  */
+********************************************************************************</code></pre>
+<p>The lines above are comments, indicating that the purpose of the code block is to import data from an Excel file provided by macroeconomic modelers.</p>
+<pre><code>{</code></pre>
+<p>This marks the beginning of a block of Stata commands.</p>
+<pre><code>local i = 0
+foreach x of global scenarios {</code></pre>
+<p>A local macro <code>i</code> is initialized to 0. A loop is then started, iterating over a global macro called <code>scenarios</code>, which presumably contains a list of sheet names from the Excel file that should be imported.</p>
+<pre><code>    qui import excel "${scenario_file}", sheet("`x'") cellrange(A3:N63) clear</code></pre>
+<p>For each sheet name in <code>scenarios</code>, the code imports data from the Excel file specified by the <code>scenario_file</code> macro. The data is imported from the cell range <code>A3:N63</code>.</p>
+<pre><code>  ren (*) ($vars)</code></pre>
+<p>This command renames the variables in the dataset using the variable names stored in the global macro <code>$vars</code>.</p>
+<pre><code>  local i = `i'+1
+    g scenid = `i'</code></pre>
+<p>The counter <code>i</code> is incremented by 1, and a new variable <code>scenid</code> is created in the dataset, which is given the current value of <code>i</code>. This acts as an identifier for each scenario.</p>
+<pre><code>    tempfile scen`i'
+    qui save `scen`i''
+}</code></pre>
+<p>The dataset is saved into a temporary file named based on the current value of <code>i</code> (like <code>scen1</code>, <code>scen2</code>, etc.). The loop then moves on to the next sheet name in <code>scenarios</code>.</p>
+<pre><code>use `scen1', clear</code></pre>
+<p>The dataset from the first scenario (<code>scen1</code>) is loaded into memory.</p>
+<pre><code>local num : list sizeof global(scenarios)
+forvalues i = 2/`num' {
+    append using `scen`i''
+}</code></pre>
+<p>A new local macro <code>num</code> is defined, which calculates the number of items in the <code>scenarios</code> global macro. Then, a loop starts from 2 up to the value of <code>num</code>. For each iteration, the dataset for the scenario corresponding to the current value of <code>i</code> is appended to the dataset in memory.</p>
+<pre><code>cap drop if year==.</code></pre>
+<p>Any observations with a missing value for the <code>year</code> variable are dropped.</p>
+<pre><code>qui g rwage = wage/cpi</code></pre>
+<p>A new variable <code>rwage</code> is created, which represents the real wage by dividing the <code>wage</code> variable by the <code>cpi</code> (Consumer Price Index) variable. This adjusts the wage for inflation.</p>
+<pre><code>g Variant = ""
+local i = 1
+    foreach variant of global variants {
+        replace Variant = "`variant'" if scenid==`i'
+        local i = `i' + 1
+    }</code></pre>
+<p>The variable <code>Variant</code> is initialized with empty strings. Then, a loop iterates over another global macro named <code>variants</code>. For each iteration, the value of <code>Variant</code> is replaced with the current item from <code>variants</code> where the <code>scenid</code> matches the current value of <code>i</code>. This assigns the appropriate variant name to each observation based on its <code>scenid</code>.</p>
+<pre><code>merge m:1 year Variant using `pop'</code></pre>
+<p>The dataset is then merged with the one saved in the temporary file <code>pop</code> based on the <code>year</code> and <code>Variant</code> variables.</p>
+<pre><code>drop if _merge==2
+drop _merge</code></pre>
+<p>Observations that didn’t find a match in the <code>pop</code> dataset are dropped, and the <code>_merge</code> variable (created by the <code>merge</code> command) is also dropped.</p>
+<pre><code>sort scenid year</code></pre>
+<p>The dataset is sorted by <code>scenid</code> and then <code>year</code>.</p>
+<pre><code>g consumption_pc = consumption/(pop*10e2)  
+}</code></pre>
+<p>A new variable <code>consumption_pc</code> is created, which calculates the per capita consumption. This is done by dividing the <code>consumption</code> variable by 100 times the <code>pop</code> variable.</p>
+<p>In summary, this code chunk:</p>
+<ol type="1">
+<li>Imports various scenarios from an Excel file and saves each as a temporary Stata dataset.</li>
+<li>Combines all the scenarios into one dataset.</li>
+<li>Processes the dataset by calculating real wages, assigning scenario names, merging with population data, and calculating per capita consumption values.</li>
+</ol>
+<p>Finally, for this file: ******************************************************************************** /* Creating globals by year/scenario to be used later in the microsimulation */ ******************************************************************************** { qui sum year local minyear = $surveyyear local maxyear = r(max) levelsof scenid, loc(scenarios) foreach sc of numlist `scenarios’ { forvalues t = `minyear’/`maxyear’ { /* GDP */ qui sum gdp if year==`t’ &amp; scenid==`sc’ local gdp_t = r(sum) qui sum gdp if year==`minyear’ &amp; scenid==`sc’ local gdp_base = r(sum) global gdp_growth_t`t’_sc`sc’ = `gdp_t’/`gdp_base’ /* Consumption */ qui sum consumption if year==`t’ &amp; scenid==`sc’ local consumption_t = r(sum) qui sum consumption if year==`minyear’ &amp; scenid==`sc’ local consumption_base = r(sum) global c_growth_t`t’_sc`sc’ = `consumption_t’/`consumption_base’ /* Consumption per capita */ qui sum consumption_pc if year==`t’ &amp; scenid==`sc’ local consumption_t = r(sum) qui sum consumption_pc if year==`minyear’ &amp; scenid==`sc’ local consumption_base = r(sum) global pcc_growth_t`t’_sc`sc’ = `consumption_t’/`consumption_base’ /* Remittances */ qui sum remittances if year==`t’ &amp; scenid==`sc’ local remittances_t = r(sum) qui sum remittances if year==`minyear’ &amp; scenid==`sc’ local remittances_base = r(sum) global remitt_growth_t`t’_sc`sc’ = `remittances_t’/`remittances_base’ /* Employment */ qui sum employment if year==`t’ &amp; scenid==`sc’ local employment_t = r(sum) qui sum employment if year==`minyear’ &amp; scenid==`sc’ local employment_base = r(sum) global emp_growth_t`t’_sc`sc’ = `employment_t’/`employment_base’ /* Employment rate */ qui sum employment if year==`t’ &amp; scenid==`sc’ local employment_t_n = r(sum) qui sum wa_population if year==`t’ &amp; scenid==`sc’ local employment_t_d = r(sum) global emp_rate_t`t’_sc`sc’ = `employment_t_n’/`employment_t_d’ /* Working age population */ qui sum wa_population if year==`t’ &amp; scenid==`sc’ local employment_t = r(sum) qui sum wa_population if year==`minyear’ &amp; scenid==`sc’ local employment_base = r(sum) global wapop_growth_t`t’_sc`sc’ = `employment_t’/`employment_base’ /* Value added */ qui sum agriculture_va if year==`t’ &amp; scenid==`sc’ local N_i = r(sum) qui sum agriculture_va if year==`minyear’ &amp; scenid==`sc’ local N_base = r(sum) global growth_agriculture_t`t’_sc`sc’ = `N_i’/`N_base’ qui sum industry_va if year==`t’ &amp; scenid==`sc’ local N_i = r(sum) qui sum industry_va if year==`minyear’ &amp; scenid==`sc’ local N_base = r(sum) global growth_industry_t`t’_sc`sc’ = `N_i’/`N_base’ qui sum services_va if year==`t’ &amp; scenid==`sc’ local N_i = r(sum) qui sum services_va if year==`minyear’ &amp; scenid==`sc’ local N_base = r(sum) global growth_services_t`t’_sc`sc’ = `N_i’/`N_base’ /* Nominal Wages */ qui sum wage if year==`t’ &amp; scenid==`sc’ local N_i = r(sum) qui sum wage if year==`minyear’ &amp; scenid==`sc’ local N_base = r(sum) global growth_wage_t`t’_sc`sc’ = `N_i’/`N_base’ /* Real Wages */ qui sum rwage if year==`t’ &amp; scenid==`sc’ local N_i = r(sum) qui sum rwage if year==`minyear’ &amp; scenid==`sc’ local N_base = r(sum) global growth_rwage_t`t’_sc`sc’ = `N_i’/`N_base’ } } } global c:all globals macro list c</p>
+<p>Sure, let’s break down this code chunk.</p>
+<pre><code>********************************************************************************
+/* Creating globals by year/scenario to be used later in the microsimulation */
+********************************************************************************</code></pre>
+<p>The lines above are comments, indicating that the purpose of the code block is to generate a set of global macros containing values for various economic indicators by year and scenario. These will be used later in a microsimulation.</p>
+<pre><code>{</code></pre>
+<p>This marks the beginning of a block of Stata commands.</p>
+<pre><code>qui sum year
+local minyear = $surveyyear
+local maxyear = r(max)</code></pre>
+<p>These lines determine the range of years in the dataset. The minimum year is set to a predefined global macro (<code>$surveyyear</code>), and the maximum year is the maximum year observed in the dataset.</p>
+<pre><code>levelsof scenid, loc(scenarios)</code></pre>
+<p>This line identifies all the unique values of <code>scenid</code> in the dataset and stores them in a local macro called <code>scenarios</code>.</p>
+<pre><code>foreach sc of numlist `scenarios' {</code></pre>
+<p>The code then starts a loop, iterating over each unique scenario in the dataset.</p>
+<pre><code>forvalues t = `minyear'/`maxyear' {</code></pre>
+<p>Inside the loop for each scenario, another loop starts which iterates over the years from the minimum to the maximum year.</p>
+<p>Within these nested loops, a series of commands calculate global growth rates and other indicators for various economic variables (GDP, consumption, employment, value added in different sectors, wages, etc.). The calculations are typically in the form:</p>
+<pre><code>qui sum [variable] if year==`t' &amp; scenid==`sc'
+local [variable]_t = r(sum)
+qui sum [variable] if year==`minyear' &amp; scenid==`sc'
+local [variable]_base = r(sum)
+global [variable]_growth_t`t'_sc`sc' = `variable_t'/`variable_base'</code></pre>
+<p>For each combination of year and scenario, these commands:</p>
+<ol type="1">
+<li>Sum up the variable’s value for the current year (<code>t</code>) and scenario (<code>sc</code>).</li>
+<li>Save this sum in a local macro.</li>
+<li>Sum up the variable’s value for the base year and the current scenario.</li>
+<li>Save this sum in another local macro.</li>
+<li>Calculate the growth rate by dividing the current year’s sum by the base year’s sum.</li>
+<li>Save the growth rate in a global macro.</li>
+</ol>
+<p>These steps are repeated for several economic indicators. At the end of the nested loops, the Stata dataset will contain a series of global macros capturing the growth rates and other economic indicators for each year and scenario.</p>
+<pre><code>}
+
+global c:all globals
+macro list c 
+}</code></pre>
+<p>After finishing the calculations for all scenarios and years, the code then lists all global macros, giving you an overview of the generated variables. The block of Stata commands then ends.</p>
+<p>In summary, this code chunk processes the dataset to generate a comprehensive set of global macros containing values for various economic indicators, broken down by year and scenario. These global macros can then be used in subsequent analyses or microsimulations.</p>
+<p>Perfect! Let’s do another file please. Here’s the first chunk: *============================================================================== /* Reweighting using education projections, UN age projections and sectoral shares from MFMOD */ ==============================================================================*/ timer clear 1 timer on 1 //local makes reference to the number of scenario. It is defined times variants //because local i = 1 /// Loop over variants from pop proyections and years to show results defined in Master /// The number of total scenarios are defined one-to-one combining variant-scenario foreach variant of global variants { foreach t of global yearsto { if ( (`i’==1 &amp; `t’==2021) | (`t’&gt;2021) ) { use “$path/data/MAG_assigned.dta”, clear ren (ylbi) (yflab) g pcnli = ynl/hhsize</p>
+<p>This code chunk pertains to a reweighting procedure using education projections, United Nations (UN) age projections, and sectoral shares from a macroeconomic model named “MFMOD”. Let’s break it down step by step:</p>
+<pre><code>*==============================================================================
+/* Reweighting using education projections, UN age projections and sectoral 
+shares from MFMOD */
+==============================================================================*/</code></pre>
+<p>The lines above are comments describing the purpose of this code chunk. It provides context for what the following code aims to achieve.</p>
+<pre><code>timer clear 1    
+timer on 1    </code></pre>
+<p>These commands clear the first timer and then start it. Stata’s <code>timer</code> functionality allows for tracking the time taken for specific operations, useful for benchmarking performance.</p>
+<pre><code>//local makes reference to the number of scenario. It is defined times variants 
+//because 
+local i = 1</code></pre>
+<p>The local macro <code>i</code> is initialized to 1. From the comments, it seems <code>i</code> will be used as a counter or reference number for the scenarios. Each scenario will likely be related to specific combinations of variants.</p>
+<pre><code>foreach variant of global variants {
+    foreach t of global yearsto {</code></pre>
+<p>Nested loops begin here. The outer loop iterates over each variant specified in a global macro called <code>variants</code>. The inner loop, for each variant, iterates over years specified in a global macro called <code>yearsto</code>.</p>
+<pre><code>if ( (`i'==1 &amp; `t'==2021) | (`t'&gt;2021) ) {</code></pre>
+<p>This conditional checks if the current scenario (tracked by <code>i</code>) is the first one and the year is 2021, or if the year is after 2021. If either of these conditions is true, the code inside the block will execute.</p>
+<pre><code>use "$path/data/MAG_assigned.dta", clear</code></pre>
+<p>This line opens a dataset named <code>MAG_assigned.dta</code> from a specified path (likely set elsewhere in the code). The <code>clear</code> option ensures that the current data in memory is replaced by the new dataset.</p>
+<pre><code>ren (ylbi) (yflab)</code></pre>
+<p>This line renames the variable <code>ylbi</code> to <code>yflab</code>.</p>
+<pre><code>g pcnli = ynl/hhsize</code></pre>
+<p>A new variable, <code>pcnli</code>, is created. It is the result of dividing the <code>ynl</code> variable by <code>hhsize</code>, which possibly represents the per capita non-labor income in the household.</p>
+<p>The code then appears to end abruptly, suggesting that this is only a part of the entire script.</p>
+<p>In summary, this chunk sets up a mechanism to iterate through combinations of variants and years, loads a dataset for relevant combinations, makes some modifications, and calculates per capita non-labor income.</p>
+<p>Great. Next bit: /*============================================================================== /* A.0 Define key variables and globals/rates */ ==============================================================================*/ /// Theree levels of education defined recode educy (0/3 = 1 “0-3”) (3/7 = 2 “3-7”) (7/11 = 3 “8+”), g(calif) /* Growth in the number of employed people using value-added together with an elasticity of employment to VA for subsaharian region Source: Table 3.12 in the paper. Average for SSA */ mat industry_growth = /// 1+(${growth_agriculture_t`t’_sc`i’}-1)*E<span class="math display">\[1,1\]</span> \ /// 1+( ${growth_industry_t`t’_sc`i’}-1)*E<span class="math display">\[2,1\]</span> \ /// 1+( <span class="math inline">\({growth\_services\_t\`t'\_sc\`i'}-1)\*E\[3,1\] matlist industry\_growth global employment = (\)</span>{emp_rate_t`t’_sc`i’}) / (<span class="math inline">\({emp\_rate\_t\)</span>{surveyyear}_sc`i’}) /*============================================================================== /* A.1 Main reweighting command */ ==============================================================================*/ ///Main command runs the reweighting given constrains by gender, population proyections, education mfmodms_reweight, age(age) edu(calif) gender(gender) hhsize(hhsize) id(hhid) /// iw(wgt) country(“<span class="math inline">\(country") iyear(\)</span>surveyyear) tyear(`t’) generate(wgtsim) /// industry(industry) growth(industry_growth) match(HH) popdata(”<span class="math inline">\(popdata") employment(\)</span>employment) variant(`variant’) /*============================================================================== /* A.2 Wage bill at baseline */ ==============================================================================*/ //Labor income (wage bill) at baseline qui sum yflab <span class="math display">\[aw=wgt\]</span> scalar Y0 = r(mean)</p>
+<p>This code chunk delves deeper into the processing of the data, focusing on defining key variables and globals, and then reweighting the data based on several constraints. Let’s examine each section:</p>
+<pre><code>/*==============================================================================
+/* A.0 Define key variables and globals/rates */
+==============================================================================*/</code></pre>
+<p>This comment demarcates the start of the section where key variables and globals/rates will be defined.</p>
+<pre><code>recode educy (0/3 = 1 "0-3") (3/7 = 2 "3-7") (7/11 = 3 "8+"), g(calif)</code></pre>
+<p>This command recodes the <code>educy</code> variable, which seems to represent years of education. It bins the years into three categories: “0-3”, “3-7”, and “8+”. The newly created categorical variable is named <code>calif</code>.</p>
+<pre><code>mat industry_growth = /// 
+    1+(${growth_agriculture_t`t'_sc`i'}-1)*E[1,1] \ ///
+    1+(   ${growth_industry_t`t'_sc`i'}-1)*E[2,1] \ ///
+    1+(   ${growth_services_t`t'_sc`i'}-1)*E[3,1]
+matlist industry_growth</code></pre>
+<p>A matrix <code>industry_growth</code> is created, which is based on a combination of previously defined global variables and the matrix <code>E</code>. The <code>industry_growth</code> matrix represents growth in different industry sectors.</p>
+<pre><code>global employment = (${emp_rate_t`t'_sc`i'})  / (${emp_rate_t${surveyyear}_sc`i'}) </code></pre>
+<p>A global variable <code>employment</code> is created based on employment rates for a particular year and scenario. This variable captures the growth in employment rate from the survey year to the target year.</p>
+<pre><code>/*==============================================================================
+/* A.1 Main reweighting command  */
+==============================================================================*/</code></pre>
+<p>A demarcation for the section where the main reweighting command will be run.</p>
+<pre><code>mfmodms_reweight, age(age) edu(calif) gender(gender) hhsize(hhsize) id(hhid) ///
+    iw(wgt) country("$country") iyear($surveyyear) tyear(`t') generate(wgtsim) /// 
+    industry(industry) growth(industry_growth) match(HH) popdata("$popdata") employment($employment) variant(`variant')</code></pre>
+<p>The command <code>mfmodms_reweight</code> appears to be a custom command (possibly from a user-written package or an in-house module) that performs the reweighting based on several constraints. The variables and parameters to be considered in the reweighting process are specified.</p>
+<pre><code>/*==============================================================================
+/* A.2 Wage bill at baseline */
+==============================================================================*/</code></pre>
+<p>This section will calculate the wage bill at the baseline.</p>
+<pre><code>qui sum yflab [aw=wgt]
+scalar Y0 = r(mean)</code></pre>
+<p>The command quietly calculates the weighted sum of the <code>yflab</code> variable (which possibly represents the labor income). The result is stored as a scalar named <code>Y0</code>.</p>
+<p>In summary, this code chunk defines essential variables and constraints, runs a reweighting procedure on the dataset, and calculates a baseline wage bill.</p>
+<p>awesome, great. Next: /*============================================================================== /* A.3 Wage bill at simulated year/scenario */ ==============================================================================*/ /* “wage” by sector grow in a way consistent with VA, such that the share of the wage bill on VA is constant */ qui replace yflab = yflab*(<span class="math inline">\({growth\_agriculture\_t\`t'\_sc\`i'} / industry\_growth\[1,1\]) if industry==1 qui replace yflab = yflab\*(\)</span>{growth_industry_t`t’_sc`i’} / industry_growth<span class="math display">\[2,1\]</span>) if industry==2 qui replace yflab = yflab*(<span class="math inline">\({growth\_services\_t\`t'\_sc\`i'} / industry\_growth\[3,1\]) if industry==3 //Labor income (wage bill) at simulated year and scenario qui sum yflab \[aw=wgtsim\`t'\] scalar Y1 = r(mean) /\*============================================================================== /\* A.4 Re-center and simulated wealfare aggregate \*/===============================================================================\*/ /\* Re-center, so we only modify the distribution of "labor income" \*/ qui replace yflab = yflab \* (Y0/Y1) /\* Aggregate to household again \*/ bys hhid: egen ysim\_\`t'\_sc\`i' = sum(yflab) /\* Divide by hhsize to make per capita again \*/ qui replace ysim\_\`t'\_sc\`i'=(ysim\_\`t'\_sc\`i')/hhsize /\* Adding back "non-labor" income \*/ qui replace ysim\_\`t'\_sc\`i'=ysim\_\`t'\_sc\`i' + pcnli /\* Adjusting the consumption according to the projection \*/ qui sum pcc \[aw=wgt\] scalar pccY0 = r(mean) qui sum ysim\_\`t'\_sc\`i' \[aw=wgtsim\`t'\] scalar pccrwY1 = r(mean) qui replace ysim\_\`t'\_sc\`i' = ysim\_\`t'\_sc\`i' \* (pccY0\*\)</span>{pcc_growth_t`t’_sc`i’}) / pccrwY1 label var ysim_`t’_sc`i’ “Simulated pcc - After reweighting and hh consumption growth, Year: `t’” ren wgtsim`t’ wgtsim`t’_sc`i’ if (`i’==1 &amp; `t’==2021) save “<span class="math inline">\(path/data/MAG\_simulated.dta",replace else { qui merge 1:1 hhid pid using"\)</span>path/data/MAG_simulated.dta”, keepusing(ysim_*_sc* wgtsim*_sc* ) drop _merge qui save “$path/data/MAG_simulated.dta”, replace } dis in red “DONE WITH SCENARIO `i’ AND YEAR `t’” } /* Conditional to skip scenarios for 2021 */ } /* Loop over years */ local i = `i’+1 } /* Loop over scenarios */ timer off 1 timer list 1</p>
+<p>This portion of the code takes the user through calculating the simulated wage bill for different scenarios and years and then modifies the distribution of labor income accordingly. Here’s a detailed breakdown:</p>
+<pre><code>/*==============================================================================
+/* A.3 Wage bill at simulated year/scenario */
+==============================================================================*/</code></pre>
+<p>This section focuses on the wage bill for a specific simulated year and scenario.</p>
+<pre><code>/* "wage" by sector grow in a way consistent with VA, such that the share of the wage bill on VA is constant */   </code></pre>
+<p>The comments suggest adjusting the <code>yflab</code> (probably representing labor income or wage) in such a way that it grows consistently with Value Added (VA), ensuring the share of the wage bill on VA remains constant. This is done for three sectors: agriculture, industry, and services.</p>
+<pre><code>//Labor income (wage bill) at simulated year and scenario   </code></pre>
+<p>Here, the wage bill for the simulated year and scenario is computed and stored in a scalar <code>Y1</code>.</p>
+<pre><code>/*==============================================================================
+/* A.4 Re-center and simulated welfare aggregate */
+==============================================================================*/</code></pre>
+<p>This section aims to adjust the labor income, aggregate it to the household level, then adjust it further with non-labor income and consumption projections.</p>
+<pre><code>/* Re-center, so we only modify the distribution of "labor income" */  </code></pre>
+<p>The comment suggests re-centering the labor income distribution, ensuring that only the distribution of labor income is modified.</p>
+<pre><code>/* Aggregate to household again */</code></pre>
+<p>Labor income is aggregated at the household level, producing a new variable named <code>ysim_</code>t’_sc<code>i'</code>, which seems to represent simulated labor income for a specific year (<code>t</code>) and scenario (<code>i</code>).</p>
+<pre><code>/* Divide by hhsize to make per capita again */</code></pre>
+<p>The simulated labor income is adjusted to become per capita values.</p>
+<pre><code>/* Adding back "non-labor" income */</code></pre>
+<p>To the simulated labor income per capita, non-labor income (denoted by <code>pcnli</code>) is added.</p>
+<pre><code>/* Adjusting the consumption according to the projection */</code></pre>
+<p>This portion adjusts the simulated labor income based on the growth in per capita consumption from projections.</p>
+<pre><code>if (`i'==1 &amp; `t'==2021) save "$path/data/MAG_simulated.dta",replace 
+else {</code></pre>
+<p>This conditional statement checks if it’s the base year (2021) and the first scenario. If it is, the dataset is saved anew. If not, the dataset is appended with new simulated values for the other years and scenarios.</p>
+<pre><code>dis in red "DONE WITH SCENARIO `i' AND YEAR `t'"</code></pre>
+<p>After processing each scenario and year, a message is displayed in red, indicating the completion of the scenario-year pair.</p>
+<pre><code>} /* Conditional to skip scenarios for 2021 */
+} /* Loop over years */
+local i = `i'+1
+} /* Loop over scenarios */</code></pre>
+<p>These closing brackets represent the end of loops and conditions. The code runs through various scenarios and years, updating the variable <code>i</code> (scenario counter) for each iteration.</p>
+<p>Finally:</p>
+<pre><code>timer off 1
+timer list 1</code></pre>
+<p>The timer that was started at the beginning of the code is turned off, and the time taken is displayed.</p>
+<p>Overall, this code chunk simulates labor income under different scenarios and years, adjusts it based on various factors, and then saves or appends the results to a file named <code>MAG_simulated.dta</code>.</p>
+<p>Great, thank you, we are done with that file. We have two more files to go. Let’s start with the next, this is a short one. I appreciate your help: *************************************************************************************************************** * Generating indicators *************************************************************************************************************** { use “<span class="math inline">\(path/data/MAG\_simulated",clear merge 1:1 hhid pid using "\)</span>path/data/MAG_assigned”, keepusing(pline* lbpl ubpl) global scenssim 1 2 3 4 5 6 global nscsteps 2030(10)2050 *g urban = rural!=1 keep hhid pid wgt wgtsim* ysim* pcc region gender zone pline* lbpl ubpl g pov19 = 1.9 g pov32 = 3.2 g pov55 = 5.5 g pov10 = 10 g country=1 g Ysim_baseyear = pcc preserve sp_groupfunction <span class="math display">\[aw=wgt\]</span>, poverty(Ysim_baseyear) /// povertyline(pline215 pline365 pline685 lbpl ubpl) gini(Ysim_baseyear) mean(Ysim_baseyear) by(country) g year=<span class="math inline">\(surveyyear tempfile resultsbase qui save \`resultsbase' restore preserve sp\_groupfunction \[aw=wgt\], poverty(Ysim\_baseyear) /// povertyline(pline215 pline365 pline685 lbpl ubpl) mean(Ysim\_baseyear) by(country region) g year=\)</span>surveyyear tempfile resultsbase_reg qui save `resultsbase_reg’ restore preserve sp_groupfunction <span class="math display">\[aw=wgt\]</span>, poverty(Ysim_baseyear) /// povertyline(pline215 pline365 pline685 lbpl ubpl) mean(Ysim_baseyear) by(country zone) g year=<span class="math inline">\(surveyyear tempfile resultsbase\_urb qui save \`resultsbase\_urb' restore preserve sp\_groupfunction \[aw=wgt\], poverty(Ysim\_baseyear) /// povertyline(pline215 pline365 pline685 lbpl ubpl) mean(Ysim\_baseyear) by(country gender) g year=\)</span>surveyyear tempfile resultsbase_gender qui save `resultsbase_gender’ restore drop Ysim_baseyear foreach sc in <span class="math inline">\(scenssim { forvalues i=\)</span>nscsteps { preserve noisily sp_groupfunction <span class="math display">\[aw=wgtsim\`i'\_sc\`sc'\]</span>, poverty(ysim_`i’_sc`sc’) /// povertyline(pline215 pline365 pline685 lbpl ubpl) gini(ysim_`i’_sc`sc’) mean(ysim_*`i’_sc`sc’) by(country) g year=`i’ tempfile results`i’_`sc’ qui save `results`i’_`sc’’ restore } }</p>
+<p>This code is primarily involved in generating poverty and inequality indicators for different scenarios and years, potentially for a microsimulation. Here’s a step-by-step breakdown:</p>
+<pre><code>* Generating indicators</code></pre>
+<p>The purpose of this section is to generate various indicators based on the simulated data.</p>
+<pre><code>{
+use "$path/data/MAG_simulated",clear    </code></pre>
+<p>Load the simulated data for further processing.</p>
+<pre><code>merge 1:1 hhid pid using "$path/data/MAG_assigned", keepusing(pline* lbpl ubpl)</code></pre>
+<p>Merge the data with another dataset that likely contains poverty lines or thresholds (based on variable names).</p>
+<pre><code>global scenssim 1 2 3 4 5 6
+global nscsteps 2030(10)2050</code></pre>
+<p>Define global macros for scenarios and years.</p>
+<pre><code>*g urban = rural!=1</code></pre>
+<p>Create a binary indicator for urban areas (assuming rural has been defined already).</p>
+<pre><code>keep hhid pid wgt wgtsim* ysim* pcc region gender zone pline* lbpl ubpl</code></pre>
+<p>Keep only the specified variables in the dataset.</p>
+<pre><code>g pov19 = 1.9
+g pov32 = 3.2
+g pov55 = 5.5
+g pov10 = 10</code></pre>
+<p>Define different poverty thresholds.</p>
+<pre><code>g country=1
+g Ysim_baseyear = pcc</code></pre>
+<p>Create a variable called ‘country’ with value 1 for all observations. Also, define a new variable <code>Ysim_baseyear</code> equal to the <code>pcc</code> variable, which seems to represent per capita consumption.</p>
+<p>The next set of commands uses the <code>sp_groupfunction</code> command multiple times. This command seems to be a user-defined or package-specific function that calculates some group-specific statistics, likely poverty rates, and Gini coefficients:</p>
+<pre><code>preserve
+sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) ...</code></pre>
+<p>This block calculates statistics for the base year at the country level.</p>
+<pre><code>preserve
+sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) ...</code></pre>
+<p>Similar blocks are provided for calculating statistics at different levels: region, urban vs.&nbsp;rural (zone), and gender.</p>
+<pre><code>drop Ysim_baseyear </code></pre>
+<p>Drop the previously created variable <code>Ysim_baseyear</code>.</p>
+<pre><code>foreach sc in $scenssim {  
+    forvalues i=$nscsteps { 
+        preserve
+        noisily sp_groupfunction [aw=wgtsim`i'_sc`sc'], poverty(ysim_`i'_sc`sc') ...
+        g year=`i'
+        tempfile results`i'_`sc'
+        qui save `results`i'_`sc''
+        restore
+    }
+}</code></pre>
+<p>This loop iterates over scenarios and years, calculating the same set of statistics for each combination. For each scenario-year combination, the results are saved in a temporary file.</p>
+<p>In essence, this code chunk is generating various indicators, especially around poverty, for different years and scenarios based on simulated data. The indicators are created at the country level and are also disaggregated by regions, urban/rural areas, and gender.</p>
+<p>Great, let’s move forward: foreach sc in <span class="math inline">\(scenssim { forvalues i=\)</span>nscsteps { preserve noisily sp_groupfunction <span class="math display">\[aw=wgtsim\`i'\_sc\`sc'\]</span>, poverty(ysim_`i’_sc`sc’) /// povertyline(pline215 pline365 pline685 lbpl ubpl) mean(ysim_`i’_sc`sc’) by(country region) g year=`i’ tempfile results`i’_reg_`sc’ qui save `results`i’_reg_`sc’’ restore } } foreach sc in <span class="math inline">\(scenssim { forvalues i=\)</span>nscsteps { preserve noisily sp_groupfunction <span class="math display">\[aw=wgtsim\`i'\_sc\`sc'\]</span>, poverty(ysim_`i’_sc`sc’) /// povertyline(pline215 pline365 pline685 lbpl ubpl) mean(ysim_`i’_sc`sc’) by(country zone) g year=`i’ tempfile results`i’_urb_`sc’ qui save `results`i’_urb_`sc’’ restore } } foreach sc in <span class="math inline">\(scenssim { forvalues i=\)</span>nscsteps { preserve noisily sp_groupfunction <span class="math display">\[aw=wgtsim\`i'\_sc\`sc'\]</span>, poverty(ysim_`i’_sc`sc’) /// povertyline(pline215 pline365 pline685 lbpl ubpl) mean(ysim_`i’_sc`sc’) by(country gender) g year=`i’ tempfile results`i’_gender_`sc’ qui save `results`i’_gender_`sc’’ restore } }</p>
+<p>The provided code block is a series of nested loops iterating over various scenarios (<code>$scenssim</code>) and years (<code>$nscsteps</code>). Within each loop, a function named <code>sp_groupfunction</code> is applied to the data, which likely computes poverty-related statistics. The results are then saved to separate temporary files for different combinations of scenarios, years, and groupings (region, urban/rural zone, and gender).</p>
+<p>Here’s a breakdown:</p>
+<ol type="1">
+<li><strong>Region-based calculations:</strong></li>
+</ol>
+<!-- -->
+<pre><code>foreach sc in $scenssim { 
+    forvalues i=$nscsteps { 
+        preserve
+        noisily sp_groupfunction [aw=wgtsim`i'_sc`sc'], poverty(ysim_`i'_sc`sc') ///
+        povertyline(pline215 pline365 pline685 lbpl ubpl) mean(ysim_`i'_sc`sc') by(country region) 
+        g year=`i'
+        tempfile results`i'_reg_`sc'
+        qui save `results`i'_reg_`sc''
+        restore
+    }
+}</code></pre>
+<p>This loop computes the poverty statistics for each combination of scenarios and years, disaggregated by country and region. The results are saved in temporary files named with the pattern <code>results[year]_reg_[scenario]</code>.</p>
+<ol type="1">
+<li><strong>Urban/Rural (zone) based calculations:</strong></li>
+</ol>
+<!-- -->
+<pre><code>foreach sc in $scenssim { 
+    forvalues i=$nscsteps {     
+        preserve
+        noisily sp_groupfunction [aw=wgtsim`i'_sc`sc'], poverty(ysim_`i'_sc`sc') ///
+        povertyline(pline215 pline365 pline685 lbpl ubpl) mean(ysim_`i'_sc`sc') by(country zone) 
+        g year=`i'
+        tempfile results`i'_urb_`sc'
+        qui save `results`i'_urb_`sc''
+        restore
+    }
+}</code></pre>
+<p>This loop does a similar operation as above, but instead of regions, it disaggregates the statistics by urban and rural zones. Results are saved in temporary files named <code>results[year]_urb_[scenario]</code>.</p>
+<ol type="1">
+<li><strong>Gender-based calculations:</strong></li>
+</ol>
+<!-- -->
+<pre><code>foreach sc in $scenssim {   
+    forvalues i=$nscsteps { 
+        preserve
+        noisily sp_groupfunction [aw=wgtsim`i'_sc`sc'], poverty(ysim_`i'_sc`sc') ///
+        povertyline(pline215 pline365 pline685 lbpl ubpl) mean(ysim_`i'_sc`sc') by(country gender) 
+        g year=`i'
+        tempfile results`i'_gender_`sc'
+        qui save `results`i'_gender_`sc''
+        restore
+    }
+}</code></pre>
+<p>Lastly, this loop disaggregates the poverty statistics by gender. The results are saved in temporary files named <code>results[year]_gender_[scenario]</code>.</p>
+<p>In summary, the provided Stata code generates poverty statistics based on simulated data, breaking down the results by different groupings: regions, urban/rural zones, and gender for various scenarios and years.</p>
+<p>use `resultsbase’,clear append using `resultsbase_reg’ append using `resultsbase_urb’ append using `resultsbase_gender’ foreach sc in <span class="math inline">\(scenssim { forvalues i=\)</span>nscsteps { append using `results`i’_`sc’’ append using `results`i’_reg_`sc’’ append using `results`i’_urb_`sc’’ append using `results`i’_gender_`sc’’ } } gen concat = measure +“_”+ variable+“_” +reference+“_”+string(region)+“_”+string(zone)+“_”+string(gender) order concat, first g regionref=region export excel using “<span class="math inline">\(scenario\_file", sheet("Indicators",modify) firstrow(varlabels) drop concat save "\)</span>path/outputs_indicators”,replace /* Income by percentile */ use “<span class="math inline">\(path\data\MAG\_simulated",clear merge 1:1 hhid pid using "\)</span>path/data/MAG_assigned”, keepusing(pline* lbpl ubpl) keep hhid pid wgt wgtsim* ysim* pcc pline* lbpl ubpl g Ysim_baseyear = pcc g country =1 drop pcc gquantiles Ysim_baseyear <span class="math display">\[aw=wgt\]</span>, _pctile nq(100) mat quantiles = r(quantiles_used) mat colnames quantiles = Ysim_baseyear foreach sc in $scenssim { forval simyear = $nscsteps { gquantiles ysim_`simyear’_sc`sc’ <span class="math display">\[aw=wgtsim\`simyear'\_sc\`sc'\]</span>, _pctile nq(100) mat mat0 = r(quantiles_used) mat colnames mat0 = ysim_`simyear’_sc`sc’ mat quantiles = quantiles,mat0 } }</p>
+<p>This provided code is focused on aggregating results from various files, preparing data for output, and then performing additional calculations on income percentiles. Here’s the step-by-step breakdown:</p>
+<ol type="1">
+<li><p><strong>Aggregating Results:</strong></p>
+<ul>
+<li>The script first loads the results from the base file (<code>resultsbase</code>) and then appends (or stacks) results from different scenarios, regions, zones (urban/rural), and gender groupings.</li>
+</ul>
+<!-- -->
+<pre><code>use `resultsbase',clear
+append using `resultsbase_reg'
+append using `resultsbase_urb'
+append using `resultsbase_gender'
+foreach sc in $scenssim {
+    forvalues i=$nscsteps {
+        append using `results`i'_`sc''
+        append using `results`i'_reg_`sc''
+        append using `results`i'_urb_`sc''
+        append using `results`i'_gender_`sc''
+    }
+}</code></pre></li>
+<li><p><strong>Create a Unique Identifier (<code>concat</code>) and Reorder:</strong></p>
+<ul>
+<li>A new variable <code>concat</code> is generated by combining several existing variables. This might serve as a descriptive or unique identifier for each observation.</li>
+</ul>
+<!-- -->
+<pre><code>gen concat = measure +"_"+ variable+"_" +reference+"_"+string(region)+"_"+string(zone)+"_"+string(gender)
+order concat, first
+g regionref=region</code></pre></li>
+<li><p><strong>Export Results:</strong></p>
+<ul>
+<li>The aggregated data is then exported to an Excel file and then saved in a Stata format.</li>
+</ul>
+<!-- -->
+<pre><code>export excel using "$scenario_file", sheet("Indicators",modify) firstrow(varlabels)
+drop concat 
+save "$path/outputs\MAG_indicators",replace</code></pre></li>
+<li><p><strong>Income by Percentile:</strong></p>
+<ul>
+<li>The script switches to another dataset (<code>MAG_simulated</code>) and prepares to compute income percentiles.</li>
+</ul>
+<!-- -->
+<pre><code>use "$path\data\MAG_simulated",clear
+merge 1:1 hhid pid using "$path/data/MAG_assigned", keepusing(pline* lbpl ubpl)
+keep hhid pid wgt wgtsim* ysim* pcc pline* lbpl ubpl
+g Ysim_baseyear = pcc
+g country =1
+drop pcc</code></pre>
+<ul>
+<li>It first calculates the percentiles for the base year income.</li>
+</ul>
+<!-- -->
+<pre><code>gquantiles Ysim_baseyear [aw=wgt], _pctile nq(100)
+mat quantiles = r(quantiles_used)
+mat colnames quantiles = Ysim_baseyear</code></pre>
+<ul>
+<li>The code then loops over the different scenarios and computes percentiles for income in each simulated year.</li>
+</ul>
+<!-- -->
+<pre><code>foreach sc in $scenssim {
+    forval simyear = $nscsteps {    
+        gquantiles ysim_`simyear'_sc`sc' [aw=wgtsim`simyear'_sc`sc'], _pctile nq(100)
+        mat mat0 = r(quantiles_used)
+        mat colnames mat0 = ysim_`simyear'_sc`sc'
+        mat quantiles = quantiles,mat0
+    }
+}</code></pre></li>
+</ol>
+<p>In essence, this code is primarily focused on organizing and summarizing the simulated results from different scenarios, then performing statistical analyses on the income distribution.</p>
+<p>Let’s do this bit: clear svmat quantiles, names(col) g percentil = _n export excel using “<span class="math inline">\(scenario\_file", sheet("Income\_by\_percentile",modify) firstrow(varlabels) /\* Compute deviations \*/ u "\)</span>path/outputs_indicators”, clear drop country replace region = 99 if region==. replace zone = 99 if zone==. replace gender = 99 if gender==. replace reference = “NA” if reference==“” replace _population=_population*10e-7 preserve keep if inlist(measure,“fgt0”) replace value=value*_population replace measure=“np_fgt0” if measure==“fgt0” tempfile number_poor save `number_poor’ restore append using `number_poor’ replace value=100*value if inlist(measure,“fgt0”,“fgt1”,“fgt2”,“gini”) replace variable = “ysim_base_sc0” if variable==“Ysim_baseyear” g scenid = real(substr(variable,13,2)) label define scenid 0 “base year” <span class="math inline">\(scenid ,replace label values scenid scenid g Ysim = substr(variable,1,ustrpos(variable,"\_sc")-5) replace Ysim = "base" if year==\)</span>surveyyear drop variable export excel using “$scenario_file”, sheet(“Results_long”,modify) firstrow(varlabels)</p>
+<p>This section of the code performs the following actions:</p>
+<ol type="1">
+<li><p><strong>Transform Matrix to Dataset and Export to Excel:</strong></p>
+<ul>
+<li><p>First, the data is cleared out of the current memory.</p></li>
+<li><p>The <code>quantiles</code> matrix is converted to a dataset format using <code>svmat</code>. Each column from the matrix becomes a variable in the dataset.</p></li>
+<li><p>A new variable, <code>percentil</code>, is created to indicate the row number (or the percentile).</p></li>
+<li><p>The dataset is exported to an Excel file under the sheet “Income_by_percentile”.</p>
+<pre><code>clear
+svmat quantiles, names(col)
+g percentil = _n
+export excel using "$scenario_file", sheet("Income_by_percentile",modify) firstrow(varlabels)   </code></pre></li>
+</ul></li>
+<li><p><strong>Loading Data &amp; Compute Deviations:</strong></p>
+<ul>
+<li><p>The dataset <code>MAG_indicators</code> is loaded into memory.</p></li>
+<li><p>Several variables are modified to replace missing or specific values:</p>
+<pre><code>drop country
+replace region = 99 if region==.
+replace zone = 99 if zone==.
+replace gender = 99 if gender==.
+replace reference = "NA" if reference==""
+replace _population=_population*10e-7</code></pre></li>
+<li><p>The dataset is then subsetted to keep observations where <code>measure</code> is “fgt0” (Foster-Greer-Thorbecke poverty measure with parameter 0).</p></li>
+<li><p>Some transformations are applied to the <code>value</code> variable based on the <code>measure</code> variable.</p></li>
+<li><p>A temporary file (<code>number_poor</code>) is saved. The original data is then restored and appended with this modified subset.</p>
+<pre><code>preserve
+keep if inlist(measure,"fgt0")
+replace value=value*_population
+replace measure="np_fgt0" if measure=="fgt0"
+tempfile number_poor 
+save `number_poor'
+restore
+append using `number_poor'</code></pre></li>
+<li><p>Further transformations are performed:</p>
+<pre><code>replace value=100*value if inlist(measure,"fgt0","fgt1","fgt2","gini")
+replace variable = "ysim_base_sc0" if variable=="Ysim_baseyear"</code></pre></li>
+</ul></li>
+<li><p><strong>Creating Labels and Formatting:</strong></p>
+<ul>
+<li><p>The code then proceeds to extract <code>scenid</code> (scenario ID) and creates labels for it. It also creates a variable, <code>Ysim</code>, by extracting a part of the <code>variable</code> column. Some cleanup operations are also performed.</p>
+<pre><code>g scenid = real(substr(variable,13,2))
+label define scenid 0 "base year" $scenid ,replace
+label values scenid scenid
+g Ysim = substr(variable,1,ustrpos(variable,"_sc")-5)
+replace Ysim = "base" if year==$surveyyear
+drop variable </code></pre></li>
+</ul></li>
+<li><p><strong>Final Export:</strong></p>
+<ul>
+<li><p>The final version of the dataset is exported to an Excel file under the sheet “Results_long”.</p>
+<pre><code>export excel using "$scenario_file", sheet("Results_long",modify) firstrow(varlabels)</code></pre></li>
+</ul></li>
+</ol>
+<p>Overall, this code focuses on data manipulation tasks, including reshaping the data, generating new variables, making adjustments to existing variables, and exporting the processed data to Excel for further use.</p>
+<p>Final bit of this file: * Deviations from baseline drop if Ysim==“base” keep if gender==99 drop _population reshape wide value, i(measure reference region zone year) j(scenid) local num : list sizeof global(scenarios) forvalues i=2(1)`num’ { g des_percent_`i’ = 100*(value`i’-value1)/value1 } forvalues i=2(1)`num’ { g des_level_`i’ = value`i’-value1 } drop value* reshape long des_percent_ des_level_, i(Ysim measure reference region zone year) j(scenid) rename des_*_ des_* gen concat = measure +“_”+ Ysim+string(year)+“_” +string(scenid)+“_” +reference+“_”+string(region)+“_”+string(zone)+“_”+string(gender) order concat, first export excel using “$scenario_file”, sheet(“Deviations_long”,modify) firstrow(varlabels) }</p>
+<p>Here’s an explanation of the provided Stata code:</p>
+</section>
+<section id="generating-deviations-from-baseline" class="level3">
+<h3 class="anchored" data-anchor-id="generating-deviations-from-baseline">Generating Deviations from Baseline:</h3>
+<ol type="1">
+<li><p><strong>Data Preprocessing:</strong></p>
+<ul>
+<li><p>Remove observations where the variable <code>Ysim</code> is equal to “base”.</p></li>
+<li><p>Keep only those observations where the gender is coded as 99.</p></li>
+<li><p>Drop the variable <code>_population</code> as it is not needed.</p></li>
+<li><p>Reshape the dataset from long format to wide format using the <code>value</code> variable, with new columns created for each <code>scenid</code>. This will generate variables like <code>value1</code>, <code>value2</code>, etc., for each scenario.</p>
+<pre><code>drop if Ysim=="base"
+keep if gender==99
+drop _population
+reshape wide value, i(measure reference region zone year) j(scenid)</code></pre></li>
+</ul></li>
+<li><p><strong>Compute Deviations as Percentage and Levels:</strong></p>
+<ul>
+<li><p>For each scenario, calculate the deviation as a percentage from the baseline (<code>value1</code>). This deviation indicates how much a value in a given scenario has changed relative to the baseline scenario.</p></li>
+<li><p>Similarly, compute the deviation in levels (absolute difference from the baseline).</p>
+<pre><code>local num : list sizeof global(scenarios)
+forvalues i=2(1)`num' {
+  g des_percent_`i' = 100*(value`i'-value1)/value1
+}
+forvalues i=2(1)`num' {
+  g des_level_`i' = value`i'-value1
+}</code></pre></li>
+</ul></li>
+<li><p><strong>Reshape and Rename:</strong></p>
+<ul>
+<li><p>Drop all the <code>value*</code> columns.</p></li>
+<li><p>Reshape the dataset back to long format based on the deviation columns.</p></li>
+<li><p>Rename the columns for better clarity.</p>
+<pre><code>drop value*
+reshape long des_percent_ des_level_, i(Ysim measure reference region zone year) j(scenid)
+rename des_*_ des_*</code></pre></li>
+</ul></li>
+<li><p><strong>Concatenate and Order:</strong></p>
+<ul>
+<li><p>Create a new variable, <code>concat</code>, that combines several variables into a single string. This can be useful for uniquely identifying or categorizing each observation.</p></li>
+<li><p>Reorder the dataset so that <code>concat</code> appears first.</p>
+<pre><code>gen concat = measure +"_"+ Ysim+string(year)+"_" +string(scenid)+"_" +reference+"_"+string(region)+"_"+string(zone)+"_"+string(gender)
+order concat, first</code></pre></li>
+</ul></li>
+<li><p><strong>Export to Excel:</strong></p>
+<ul>
+<li><p>Export the current dataset to an Excel file under the sheet “Deviations_long”.</p>
+<pre><code>export excel using "$scenario_file", sheet("Deviations_long",modify) firstrow(varlabels)</code></pre></li>
+</ul></li>
+</ol>
+<p>This code is mainly concerned with deriving deviations from a baseline across different scenarios and organizing the resulting dataset for further analysis or presentation. The computed deviations can provide insights into how different scenarios compare to a reference or baseline scenario in the given dataset.</p>
+<p>Great, that was that file. Out of curiosity, in the previous chunk you analyzed, how did you know fgt referred to Foster, Greer, Thorbecke if it’s not in any of the inline comments?</p>
+<p>I recognized the term <code>fgt</code> as a reference to the Foster, Greer, Thorbecke (FGT) poverty measures because of my training data and prior knowledge. The FGT measures are a class of poverty indicators that are widely used in economic research and policy analyses. The measures are parameterized by a poverty aversion parameter, allowing for the measurement of the incidence (headcount), depth (poverty gap), and severity of poverty.</p>
+<p>While the Stata code you provided didn’t explicitly state that <code>fgt</code> refers to the Foster, Greer, Thorbecke indices, the use of this acronym in the context of poverty measurement is a standard convention in the field. As such, I was able to recognize and infer its meaning.</p>
+<p>That’s impressive!</p>
+<p>Thank you! I’m here to help and provide accurate information based on my training data. If you have any other questions or need further clarification on any topic, feel free to ask!</p>
+<p>Awesome, let’s go over the last file, please.</p>
+<p>Of course! Please provide the code or content from the last file you’d like to go over, and I’ll assist you with it.</p>
+<p>version 15.1 drop _all macro drop _all clear all set more off /*============================================================================== /* 1.1 Setting paths for locating ados and dta outputs */ ==============================================================================*/ if “`c(username)’”==“wb527706” { global path “C:\OneDrive - WBG” } global scenario_file “<span class="math inline">\(path\MagClimSim.xlsx" global popdata "\)</span>path_population.dta” /*============================================================================== /* 1.2 isntalling key programs */ ==============================================================================*/ *cap net install github, from(“<a href="https://haghish.github.io/github/" class="uri">https://haghish.github.io/github/</a>”) *cap github install erciomunoz/mfmodms_reweight *ssc uninstall wentropy *adopath + “Codes/Ado” /* Old version of wentropy */</p>
+<p>This code sets up the Stata environment for a specific workflow and is essentially a preliminary code before the main analysis takes place. Here’s an interpretation of the code:</p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation:</h3>
+<ul>
+<li><strong>Version Control</strong>: The script starts by setting the Stata version to ensure compatibility. This means the code is expected to run in Stata version 15.1 or higher.</li>
+</ul>
+<!-- -->
+<pre><code>version 15.1</code></pre>
+<ul>
+<li><strong>Housekeeping</strong>: The code then clears all datasets and macros from memory.</li>
+</ul>
+<!-- -->
+<pre><code>drop _all
+macro drop _all
+clear all</code></pre>
+<ul>
+<li><strong>Miscellaneous Setup</strong>: The <code>set more off</code> command ensures that output flows without pauses.</li>
+</ul>
+<!-- -->
+<pre><code>set more off</code></pre>
+<ul>
+<li><p><strong>Setting Paths</strong>:</p>
+<ul>
+<li>First, there’s a conditional path-setting based on the username of the system. If the user is <code>wb527706</code>, a specific path to a folder named <code>Tool</code> under <code>Madagascar</code> is set. This is probably the working directory of this user.</li>
+</ul>
+<!-- -->
+<pre><code>if "`c(username)'"=="wb527706" {
+    global path "C:\Users\WB527706\OneDrive - WBG\Madagascar\Tool"
+}</code></pre>
+<ul>
+<li>Next, a reference to a specific Excel file (<code>MagClimSim.xlsx</code>) within the previously defined path is set as a global macro named <code>scenario_file</code>.</li>
+</ul>
+<!-- -->
+<pre><code>global scenario_file "$path\MagClimSim.xlsx"</code></pre>
+<ul>
+<li>Then, there’s a path to a data file (<code>UN2022_population.dta</code>). This data file likely contains population data from the UN for the year 2022.</li>
+</ul>
+<!-- -->
+<pre><code>global popdata "$path\data\UN2022_population.dta"</code></pre></li>
+<li><p><strong>Installing Key Programs</strong>:</p>
+<ul>
+<li>The next lines seem to be commented out but are instructive on how to install certain Stata packages or add-ons.</li>
+</ul>
+<!-- -->
+<pre><code>*cap net install github, from("https://haghish.github.io/github/")
+*cap github install erciomunoz/mfmodms_reweight</code></pre>
+<p>The first command attempts to install the <code>github</code> package, which provides a way to install other packages hosted on GitHub. The next command tries to install <code>mfmodms_reweight</code> from GitHub using the previously mentioned <code>github</code> package.</p>
+<ul>
+<li>After that, there’s a command to uninstall a package named <code>wentropy</code> and add a new path to the Stata adopath (where Stata looks for user-written commands). This new path points to a folder named <code>Codes/Ado</code>, which likely contains a previous version of <code>wentropy</code> or other user-defined commands.</li>
+</ul>
+<!-- -->
+<pre><code>*ssc uninstall wentropy
+*adopath + "Codes/Ado"</code></pre></li>
+</ul>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary:</h3>
+<p>This code sets the environment for a subsequent analysis. It defines paths to necessary files and folders, ensures the workspace is clean, and references the potential installation of certain tools and packages that might be required later in the workflow. The use of <code>*</code> at the beginning of lines indicates that these lines are commented out, so they won’t run. However, they can provide instructions or serve as a reference for the user.</p>
+<p>thanks, next bit: /*==============================================================================/* JM 2.0 Globals from master excel */ To modify ==============================================================================*/ global country “MDG” global surveyyear = 2021 global endyear = 2050 global vars “date year gdp population wa_population employment wage agriculture_va industry_va services_va er remittances cpi consumption” global scenarios “baseline wet_ssp370 wet_ssp119 dry_ssp370 dry_ssp119 hot_ssp370” /* List the population variants used in the different scenarios (those previously listed) */ global variants “Medium Medium Medium Medium Medium Medium” //Years to show results global yearsto 2021 2030 2040 2050</p>
+<p>This section of the code is primarily about defining global macro variables for further use in the analysis. Here’s a breakdown of what each of the commands does:</p>
+</section>
+<section id="interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-1">Interpretation:</h3>
+<ul>
+<li><strong>Country Specification</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>global country "MDG"</code></pre>
+<p>This command sets a global macro variable named <code>country</code> with the value “MDG”, which likely stands for Madagascar.</p>
+<ul>
+<li><strong>Survey and Simulation Years</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>global surveyyear = 2021
+global endyear = 2050</code></pre>
+<p>The above commands set global macro variables for the base year (<code>surveyyear</code>) and the last year of the simulation (<code>endyear</code>).</p>
+<ul>
+<li><strong>Variables to be Used</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>global vars "date year gdp population wa_population employment wage agriculture_va industry_va services_va er remittances cpi consumption"</code></pre>
+<p>This command creates a global macro variable named <code>vars</code> that lists out various variable names. These variable names likely represent different indicators or metrics that will be used later in the analysis, such as GDP, employment, wages, and various value-added metrics for different sectors.</p>
+<ul>
+<li><strong>Scenarios Definition</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>global scenarios "baseline  wet_ssp370 wet_ssp119 dry_ssp370 dry_ssp119 hot_ssp370"</code></pre>
+<p>This defines a global macro variable named <code>scenarios</code> that lists different scenarios for which the analysis will be performed. These scenarios probably represent different climate or economic conditions.</p>
+<ul>
+<li><strong>Population Variants</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>global variants "Medium Medium Medium Medium Medium Medium"</code></pre>
+<p>Here, a global macro variable named <code>variants</code> is set with multiple “Medium” values. This likely refers to different population growth variants, and since all are set to “Medium”, it suggests that all scenarios use the medium growth variant of population projections.</p>
+<ul>
+<li><strong>Years to Show Results</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>global yearsto 2021 2030 2040 2050</code></pre>
+<p>The above command sets a global macro variable named <code>yearsto</code> which lists out the specific years for which results or outputs will be generated or shown.</p>
+</section>
+<section id="summary-1" class="level3">
+<h3 class="anchored" data-anchor-id="summary-1">Summary:</h3>
+<p>This segment of code primarily defines certain parameters or settings for the subsequent analysis. It sets up the country in question, the time frame of the analysis, the specific variables to consider, the scenarios to be analyzed, the population growth variant associated with each scenario, and the specific years for which results will be displayed. These global macros will be invoked later in the script to automate and facilitate the analysis for different scenarios, years, and other parameters.</p>
+<p>/*==============================================================================/* 3.0 Read macro inputs and create global */ ==============================================================================*/ /* import excel “<span class="math inline">\(scenario\_file", sheet(opc\_hid) clear global scenarios=A\[\_N\] global variants=B\[\_N\] foreach y of global scenarios { g u\`y'=0 } import excel "\)</span>scenario_file”, sheet(years_hid) clear */ /* Read macro inputs and create globals to use them */ qui: do “$path/dofile/02_inputs.do” global c:all globals macro list c /* Create labels for the different scenarios */ global scenid_labels_desv 1 “wet_ssp370” 2 “hot_ssp370” global scenid_labels 1 “Baseline” 2 “wet_ssp370” 3 “hot_ssp370” label define scenid $scenid_labels label values scenid scenid tsset scenid year</p>
+<p>Here’s a breakdown of the provided code:</p>
+</section>
+<section id="interpretation-2" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-2">Interpretation:</h3>
+<ul>
+<li><strong>Reading Macro Inputs and Creating Globals</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>import excel "$scenario_file", sheet(opc_hid)  clear </code></pre>
+<p>This line imports data from the Excel file specified by the <code>$scenario_file</code> global, specifically from the “opc_hid” sheet. It’s important to note that this part of the code is commented out, meaning that it won’t run when the script is executed.</p>
+<pre><code>global scenarios=A[_N]
+global variants=B[_N]</code></pre>
+<p>These lines define two new global macro variables (<code>scenarios</code> and <code>variants</code>) based on the last observations in the columns “A” and “B”, respectively, of the previously imported dataset.</p>
+<pre><code>foreach y of global scenarios {
+    g u`y'=0
+}</code></pre>
+<p>For each scenario in the <code>scenarios</code> global, this loop generates a new variable with the name <code>u</code> followed by the scenario name (e.g., <code>uwet_ssp370</code>) and initializes all its values to zero.</p>
+<ul>
+<li><strong>Inputting Years and Generating Globals</strong>:</li>
+</ul>
+<p>The next segment, also commented out, seems to import another sheet from the <code>$scenario_file</code> named “years_hid” and then execute another do-file named “02_inputs.do” to read macro inputs and create corresponding globals.</p>
+<pre><code>qui: do "$path/dofile/02_inputs.do"</code></pre>
+<p>This line quietly runs the Stata do-file named “02_inputs.do”, which presumably defines some macros or globals based on its name.</p>
+<pre><code>global c:all globals
+macro list c </code></pre>
+<p>These commands create a global macro containing all current globals and then lists them out.</p>
+<ul>
+<li><strong>Creating Labels for Scenarios</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>global scenid_labels_desv 1 "wet_ssp370"  2 "hot_ssp370" 
+global scenid_labels 1 "Baseline" 2 "wet_ssp370" 3 "hot_ssp370" </code></pre>
+<p>Two new global macros are defined to store descriptive labels for the scenarios. These labels are typically used for reporting or graphing purposes to provide a human-readable description of the scenarios.</p>
+<pre><code>label define scenid $scenid_labels
+label values scenid scenid</code></pre>
+<p>These commands are used to apply the previously defined labels to the variable <code>scenid</code>, making the data easier to interpret when viewing or analyzing.</p>
+<ul>
+<li><strong>Setting the Time-Series Structure</strong>:</li>
+</ul>
+<!-- -->
+<pre><code>tsset scenid year</code></pre>
+<p>Lastly, the dataset is set up as a time-series dataset with <code>scenid</code> as the panel identifier and <code>year</code> as the time variable. This allows for time-series operations and functions to be applied to the dataset in subsequent analyses.</p>
+</section>
+<section id="summary-2" class="level3">
+<h3 class="anchored" data-anchor-id="summary-2">Summary:</h3>
+<p>This segment is focused on importing certain datasets (though some import operations are commented out), defining and listing globals, labeling scenarios for clearer interpretation, and setting up the dataset’s time-series structure. This process prepares the dataset for subsequent operations and ensures that all the necessary parameters and settings are in place for the analysis.</p>
+<p>And the last one:</p>
+<p>Sure, please paste the code you’d like me to analyze.</p>
+<p>/*==============================================================================/* 4.0 Run MFmode code and prepare simulated weights and wealfare aggregate */ ==============================================================================*/ do “<span class="math inline">\(path/dofile/03\_MFmod.do" /\*==============================================================================/\* 5.0 Generating indicators \*/ ==============================================================================\*/ qui do "\)</span>path/dofile/04_indicators.do” shell “${scenario_file}”</p>
+<p>The provided Stata code can be broken down into the following segments:</p>
+<ol type="1">
+<li><p><strong>MFmod Code Execution</strong>:</p>
+<pre><code>do "$path/dofile/03_MFmod.do"</code></pre>
+<ul>
+<li>This line runs the Stata code contained in the file <code>03_MFmod.do</code> which is located in the <code>dofile</code> directory of the path stored in the global macro <code>path</code>. The <code>03_MFmod.do</code> file likely contains routines for running the MFmod microsimulation model, but without seeing its contents, I can’t provide specifics on what operations it performs.</li>
+</ul></li>
+<li><p><strong>Generating Indicators</strong>:</p>
+<pre><code>qui do "$path/dofile/04_indicators.do"</code></pre>
+<ul>
+<li>The code then runs the <code>04_indicators.do</code> file, which likely contains routines to compute certain indicators. The <code>qui</code> prefix means that this command is executed quietly, i.e., without displaying any intermediate output in the Results window.</li>
+</ul></li>
+<li><p><strong>External Command Execution</strong>:</p>
+<pre><code>shell "${scenario_file}"</code></pre>
+<ul>
+<li>This line is a bit different. The <code>shell</code> command in Stata allows the execution of operating system commands. In this case, it seems to be trying to execute/open the file stored in the <code>scenario_file</code> global macro. If <code>${scenario_file}</code> is an Excel file, this command would open it with the default application for Excel files (usually Microsoft Excel). However, using the <code>shell</code> command can be platform-specific and might behave differently depending on the operating system.</li>
+</ul></li>
+</ol>
+<p>The given code provides an outline of a workflow that first simulates data with <code>03_MFmod.do</code>, then computes indicators with <code>04_indicators.do</code>, and lastly opens an Excel file to likely review or further manipulate the data/results.</p>
+<p>However, as always, the specifics of what each <code>.do</code> file does will be contained within those files themselves. This provided code just shows the higher-level workflow.</p>
+<p>Don’t worry, you’ve already helped me with the contents of these do files, which is the code I’ve shared with you in the previous chunks</p>
+<p>Ah, I see! In that case, you have a structured workflow:</p>
+<ol type="1">
+<li><p><strong>Setup and Preprocessing</strong>:</p>
+<ul>
+<li>The initial segments define your working environment, set the necessary paths, and import necessary libraries or tools. The globals defined will help in driving the subsequent operations.</li>
+</ul></li>
+<li><p><strong>Macro Inputs &amp; Creation of Globals</strong>:</p>
+<ul>
+<li>You fetch macro inputs from an Excel file and dynamically define some global variables. There are placeholder comments suggesting an alternate approach to fetch scenarios and years, which might have been used in earlier iterations or for debugging purposes.</li>
+</ul></li>
+<li><p><strong>MFmod Microsimulation</strong>:</p>
+<ul>
+<li>You run a microsimulation model likely to generate simulated weights and welfare aggregate measures.</li>
+</ul></li>
+<li><p><strong>Indicator Generation</strong>:</p>
+<ul>
+<li>Using the simulated data, you compute various indicators. These might be poverty rates, income measures, or other socio-economic indicators.</li>
+</ul></li>
+<li><p><strong>Opening the Excel Scenario File</strong>:</p>
+<ul>
+<li>Lastly, the main workflow ends by opening an Excel file, likely to inspect or use the scenarios and results interactively.</li>
+</ul></li>
+</ol>
+<p>Your workflow appears to be a well-structured pipeline for running a microsimulation, computing relevant indicators, and then reviewing the results. If there are any more aspects you’d like to delve into or questions about how things work, let me know! I’m here to help.</p>
+<p>Yes, one last thing. Can you take a deep look at everything we did today and can you make a list of all the input files (use files) that are not explicitly created by the code (save .dta). Just to make sure that I have everything to run the code.</p>
+<p>Certainly! Based on the chunks of code you provided today, here are the input files (<code>use</code> command) that are not explicitly created by the code provided (i.e., there’s no corresponding <code>save</code> command for them):</p>
+<ol type="1">
+<li><p><code>$popdata</code> from:</p>
+<pre><code>use "$popdata" if country=="$country", clear</code></pre></li>
+<li><p><code>"$path/data/MAG_assigned.dta"</code> from:</p>
+<pre><code>use "$path/data/MAG_assigned.dta", clear</code></pre></li>
+<li><p><code>"$path/data/MAG_simulated"</code> from:</p>
+<pre><code>use "$path/data/MAG_simulated",clear</code></pre></li>
+<li><p><code>"$path/data/MAG_assigned"</code> from:</p>
+<pre><code>merge 1:1 hhid pid using "$path/data/MAG_assigned", keepusing(pline* lbpl ubpl)</code></pre></li>
+<li><p><code>"$path/outputs\MAG_indicators"</code> from:</p>
+<pre><code>u "$path/outputs\MAG_indicators", clear</code></pre></li>
+</ol>
+<p>You’ll want to ensure that these files exist in their respective directories before running the code. If there’s any other operation or process you’d like me to check, please let me know!</p>
+<p>Does that list include files from the previous chunks, like S01_DEMO_01.dta ?</p>
+<p>My apologies for missing that. Let’s re-evaluate all the input files from the entire series of chunks you provided today.</p>
+<p>Here’s a consolidated list of all the input files (<code>use</code> commands) that are not explicitly created within the code snippets you’ve shared:</p>
+<ol type="1">
+<li><p><code>"$popdata"</code> from the chunk:</p>
+<pre><code>use "$popdata" if country=="$country", clear</code></pre></li>
+<li><p><code>"$path/data/MAG_assigned.dta"</code> from the chunk:</p>
+<pre><code>use "$path/data/MAG_assigned.dta", clear</code></pre></li>
+<li><p><code>"$path/data/MAG_simulated"</code> from the chunk:</p>
+<pre><code>use "$path/data/MAG_simulated",clear</code></pre></li>
+<li><p><code>"$path/data/MAG_assigned"</code> from the chunk:</p>
+<pre><code>merge 1:1 hhid pid using "$path/data/MAG_assigned", keepusing(pline* lbpl ubpl)</code></pre></li>
+<li><p><code>"$path/outputs\MAG_indicators"</code> from the chunk:</p>
+<pre><code>u "$path/outputs\MAG_indicators", clear</code></pre></li>
+<li><p><code>"$S01/Inputs/S01_DEMO_01.dta"</code> from the chunk:</p>
+<pre><code>use "$S01/Inputs/S01_DEMO_01.dta", clear</code></pre></li>
+<li><p><code>"$S01/Inputs/S01_EDU_01.dta"</code> from the chunk:</p>
+<pre><code>use "$S01/Inputs/S01_EDU_01.dta", clear</code></pre></li>
+<li><p><code>"$S01/Inputs/S01_LABOR_01.dta"</code> from the chunk:</p>
+<pre><code>use "$S01/Inputs/S01_LABOR_01.dta", clear</code></pre></li>
+<li><p><code>"$HHcha"</code> from the chunk:</p>
+<pre><code>u `HHcha' , clear</code></pre></li>
+<li><p><code>"$path\data\UN2022_population.dta"</code> (though this is the same as <code>$popdata</code> earlier) from the chunk:</p>
+<pre><code>global popdata "$path\data\UN2022_population.dta"</code></pre></li>
+</ol>
+<p>Make sure you have all these files in the respective directories to successfully execute all the chunks of code provided. If any of these files are generated by other parts of the code that weren’t shared or by external processes, ensure they are available and correctly placed.</p>
+<p>Thank you for your help today</p>
+<p>You’re welcome! If you have any more questions or need further assistance in the future, don’t hesitate to reach out. Have a great day and best of luck with your work! 😊</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
