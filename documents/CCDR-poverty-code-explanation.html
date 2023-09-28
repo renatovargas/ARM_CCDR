@@ -692,8 +692,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> <span class="dt">_merge</span></span>
 <span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="kw">sort</span> scenid <span class="fu">year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then a new variable <code>consumption_pc</code> is created, which calculates the per capita consumption. This is done by dividing the <code>consumption</code> variable by 100 times the <code>pop</code> variable.</p>
-<pre><code>g consumption_pc = consumption/(pop*10e2)  
-}</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>g consumption_pc = consumption/(pop*10e2)  </span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>In summary:</strong></p>
 <ol type="1">
 <li>We import various scenarios from an Excel file and save each as a temporary Stata dataset.</li>
@@ -970,47 +970,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>g Ysim_baseyear = pcc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The next set of commands uses the <code>sp_groupfunction</code> command multiple times. This command seems to be a user-defined or package-specific function that calculates some group-specific statistics, likely poverty rates, and Gini coefficients. For example, This block calculates statistics for the base year at the country level:</p>
 <div class="sourceCode" id="cb101"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="kw">preserve</span></span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>    sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) <span class="co">///</span></span>
-<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>    povertyline(pline215 pline365 pline685 lbpl ubpl) gini(Ysim_baseyear) <span class="kw">mean</span>(Ysim_baseyear) <span class="kw">by</span>(country) </span>
-<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>    g <span class="fu">year</span>=<span class="ot">$surveyyear</span></span>
-<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">tempfile</span> resultsbase</span>
-<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`resultsbase'</span></span>
-<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>    sp_groupfunction [aw=wgt], poverty(Ysim_baseyear)  <span class="co">//</span></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>    povertyline(pline215 pline365 pline685 lbpl ubpl)  <span class="co">//</span></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>                gini(Ysim_baseyear) <span class="kw">mean</span>(Ysim_baseyear) <span class="kw">by</span>(country) </span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>    g <span class="fu">year</span>=<span class="ot">$surveyyear</span></span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">tempfile</span> resultsbase</span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`resultsbase'</span></span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Similar blocks are provided for calculating statistics at different levels: region, urban vs.&nbsp;rural (zone), and gender.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="kw">preserve</span></span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>    sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) <span class="co">///</span></span>
-<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>    povertyline(pline215 pline365 pline685 lbpl ubpl) <span class="kw">mean</span>(Ysim_baseyear) <span class="kw">by</span>(country region) </span>
-<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>    g <span class="fu">year</span>=<span class="ot">$surveyyear</span></span>
-<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">tempfile</span> resultsbase_reg</span>
-<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`resultsbase_reg'</span></span>
-<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span> </span>
-<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a><span class="kw">preserve</span></span>
-<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a>    sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) <span class="co">///</span></span>
-<span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a>    povertyline(pline215 pline365 pline685 lbpl ubpl) <span class="kw">mean</span>(Ysim_baseyear) <span class="kw">by</span>(country zone) </span>
-<span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a>    g <span class="fu">year</span>=<span class="ot">$surveyyear</span></span>
-<span id="cb102-13"><a href="#cb102-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">tempfile</span> resultsbase_urb</span>
-<span id="cb102-14"><a href="#cb102-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`resultsbase_urb'</span></span>
-<span id="cb102-15"><a href="#cb102-15" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span> </span>
-<span id="cb102-16"><a href="#cb102-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-17"><a href="#cb102-17" aria-hidden="true" tabindex="-1"></a><span class="kw">preserve</span></span>
-<span id="cb102-18"><a href="#cb102-18" aria-hidden="true" tabindex="-1"></a>    sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) <span class="co">///</span></span>
-<span id="cb102-19"><a href="#cb102-19" aria-hidden="true" tabindex="-1"></a>    povertyline(pline215 pline365 pline685 lbpl ubpl) <span class="kw">mean</span>(Ysim_baseyear) <span class="kw">by</span>(country gender) </span>
-<span id="cb102-20"><a href="#cb102-20" aria-hidden="true" tabindex="-1"></a>    g <span class="fu">year</span>=<span class="ot">$surveyyear</span></span>
-<span id="cb102-21"><a href="#cb102-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">tempfile</span> resultsbase_gender</span>
-<span id="cb102-22"><a href="#cb102-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`resultsbase_gender'</span></span>
-<span id="cb102-23"><a href="#cb102-23" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>    sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) <span class="co">//</span></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>    povertyline(pline215 pline365 pline685 lbpl ubpl) <span class="co">//</span></span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>                <span class="kw">mean</span>(Ysim_baseyear) <span class="kw">by</span>(country region) </span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>    g <span class="fu">year</span>=<span class="ot">$surveyyear</span></span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">tempfile</span> resultsbase_reg</span>
+<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`resultsbase_reg'</span></span>
+<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span> </span>
+<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a><span class="kw">preserve</span></span>
+<span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a>    sp_groupfunction [aw=wgt], poverty(Ysim_baseyear)  <span class="co">//</span></span>
+<span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a>    povertyline(pline215 pline365 pline685 lbpl ubpl)  <span class="co">//</span></span>
+<span id="cb102-13"><a href="#cb102-13" aria-hidden="true" tabindex="-1"></a>                <span class="kw">mean</span>(Ysim_baseyear) <span class="kw">by</span>(country zone) </span>
+<span id="cb102-14"><a href="#cb102-14" aria-hidden="true" tabindex="-1"></a>    g <span class="fu">year</span>=<span class="ot">$surveyyear</span></span>
+<span id="cb102-15"><a href="#cb102-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">tempfile</span> resultsbase_urb</span>
+<span id="cb102-16"><a href="#cb102-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`resultsbase_urb'</span></span>
+<span id="cb102-17"><a href="#cb102-17" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span> </span>
+<span id="cb102-18"><a href="#cb102-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-19"><a href="#cb102-19" aria-hidden="true" tabindex="-1"></a><span class="kw">preserve</span></span>
+<span id="cb102-20"><a href="#cb102-20" aria-hidden="true" tabindex="-1"></a>    sp_groupfunction [aw=wgt], poverty(Ysim_baseyear)  <span class="co">//</span></span>
+<span id="cb102-21"><a href="#cb102-21" aria-hidden="true" tabindex="-1"></a>    povertyline(pline215 pline365 pline685 lbpl ubpl)  <span class="co">//</span></span>
+<span id="cb102-22"><a href="#cb102-22" aria-hidden="true" tabindex="-1"></a>                <span class="kw">mean</span>(Ysim_baseyear) <span class="kw">by</span>(country gender) </span>
+<span id="cb102-23"><a href="#cb102-23" aria-hidden="true" tabindex="-1"></a>    g <span class="fu">year</span>=<span class="ot">$surveyyear</span></span>
+<span id="cb102-24"><a href="#cb102-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">tempfile</span> resultsbase_gender</span>
+<span id="cb102-25"><a href="#cb102-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`resultsbase_gender'</span></span>
+<span id="cb102-26"><a href="#cb102-26" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And then we drop the previously created variable <code>Ysim_baseyear</code>.</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> Ysim_baseyear </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The following loop iterates over scenarios and years, calculating the same set of statistics for each combination. For each scenario-year combination, the results are saved in a temporary file.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="kw">foreach</span> <span class="kw">sc</span> <span class="kw">in</span> <span class="ot">$scenssim</span> {  </span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">forvalues</span> i=<span class="ot">$nscsteps</span> { </span>
-<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">preserve</span></span>
-<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">noisily</span> sp_groupfunction [aw=wgtsim<span class="ot">`i'</span>_sc<span class="ot">`sc'</span>], poverty(ysim_<span class="ot">`i'</span>_sc<span class="ot">`sc'</span>) ...</span>
-<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a>        g <span class="fu">year</span>=<span class="ot">`i'</span></span>
-<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">tempfile</span> results<span class="ot">`i'</span>_<span class="ot">`sc'</span></span>
-<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`results`i'</span>_<span class="ot">`sc'</span>'</span>
-<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">restore</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>      <span class="kw">preserve</span></span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">noisily</span> sp_groupfunction [aw=wgtsim<span class="ot">`i'</span>_sc<span class="ot">`sc'</span>], poverty(ysim_<span class="ot">`i'</span>_sc<span class="ot">`sc'</span>)..</span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a>      g <span class="fu">year</span>=<span class="ot">`i'</span></span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">tempfile</span> results<span class="ot">`i'</span>_<span class="ot">`sc'</span></span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">qui</span> <span class="kw">save</span> <span class="ot">`results`i'</span>_<span class="ot">`sc'</span>'</span>
+<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a>      <span class="kw">restore</span></span>
 <span id="cb104-9"><a href="#cb104-9" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb104-10"><a href="#cb104-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The following nested loops iterating over various scenarios (<code>$scenssim</code>) and years (<code>$nscsteps</code>) do the same. Within each loop, a function named <code>sp_groupfunction</code> is applied to the data, which likely computes poverty-related statistics. The results are then saved to separate temporary files for different combinations of scenarios, years, and groupings (region, urban/rural zone, and gender). The results are saved in temporary files named with the pattern <code>results[year]_[grouping]_[scenario]</code>. In summary, the code generates poverty statistics based on simulated data, breaking down the results by different groupings (regions, urban/rural zones, and gender) for various scenarios and years.</p>

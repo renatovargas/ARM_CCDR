@@ -1050,7 +1050,7 @@ Then a new variable `consumption_pc` is created, which calculates the per
 capita consumption. This is done by dividing the `consumption` variable
 by 100 times the `pop` variable.
 
-```         
+```stata    
 g consumption_pc = consumption/(pop*10e2)  
 }
 ```
@@ -1534,8 +1534,9 @@ This block calculates statistics for the base year at the country level:
 
 ```stata    
 preserve
-	sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) ///
-	povertyline(pline215 pline365 pline685 lbpl ubpl) gini(Ysim_baseyear) mean(Ysim_baseyear) by(country) 
+	sp_groupfunction [aw=wgt], poverty(Ysim_baseyear)  //
+	povertyline(pline215 pline365 pline685 lbpl ubpl)  //
+	            gini(Ysim_baseyear) mean(Ysim_baseyear) by(country) 
 	g year=$surveyyear
 	tempfile resultsbase
 	qui save `resultsbase'
@@ -1546,24 +1547,27 @@ levels: region, urban vs. rural (zone), and gender.
 
 ```stata
 preserve
-	sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) ///
-	povertyline(pline215 pline365 pline685 lbpl ubpl) mean(Ysim_baseyear) by(country region) 
+	sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) //
+	povertyline(pline215 pline365 pline685 lbpl ubpl) //
+	            mean(Ysim_baseyear) by(country region) 
 	g year=$surveyyear
 	tempfile resultsbase_reg
 	qui save `resultsbase_reg'
 restore	
 
 preserve
-	sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) ///
-	povertyline(pline215 pline365 pline685 lbpl ubpl) mean(Ysim_baseyear) by(country zone) 
+	sp_groupfunction [aw=wgt], poverty(Ysim_baseyear)  //
+	povertyline(pline215 pline365 pline685 lbpl ubpl)  //
+	            mean(Ysim_baseyear) by(country zone) 
 	g year=$surveyyear
 	tempfile resultsbase_urb
 	qui save `resultsbase_urb'
 restore	
 
 preserve
-	sp_groupfunction [aw=wgt], poverty(Ysim_baseyear) ///
-	povertyline(pline215 pline365 pline685 lbpl ubpl) mean(Ysim_baseyear) by(country gender) 
+	sp_groupfunction [aw=wgt], poverty(Ysim_baseyear)  //
+	povertyline(pline215 pline365 pline685 lbpl ubpl)  //
+	            mean(Ysim_baseyear) by(country gender) 
 	g year=$surveyyear
 	tempfile resultsbase_gender
 	qui save `resultsbase_gender'
@@ -1582,12 +1586,12 @@ results are saved in a temporary file.
 ```stata
 foreach sc in $scenssim {  
     forvalues i=$nscsteps { 
-        preserve
-        noisily sp_groupfunction [aw=wgtsim`i'_sc`sc'], poverty(ysim_`i'_sc`sc') ...
-        g year=`i'
-        tempfile results`i'_`sc'
-        qui save `results`i'_`sc''
-        restore
+      preserve
+      noisily sp_groupfunction [aw=wgtsim`i'_sc`sc'], poverty(ysim_`i'_sc`sc')..
+      g year=`i'
+      tempfile results`i'_`sc'
+      qui save `results`i'_`sc''
+      restore
     }
 }
 ```
